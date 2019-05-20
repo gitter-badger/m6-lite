@@ -1,0 +1,91 @@
+.m7-btn {
+  position: relative;
+  display: block;
+  width: @btnWidth;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 24px;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: @btnFontSize;
+  text-align: center;
+  text-decoration: none;
+  color: @btnFontColor;
+  line-height: @cellLineHeight;
+  border-radius: @btnBorderRadius;
+  .setTapColor();
+  overflow: hidden;
+}
+
+.m7-btn_primary {
+  background-color: @btnPrimaryBg;
+
+  &:not(.m7-btn_disabled):visited {
+    color: @btnPrimaryFontColor;
+  }
+
+  &:not(.m7-btn_disabled):active {
+    color: @btnPrimaryActiveFontColor;
+    background-color: @btnPrimaryActiveBg;
+  }
+}
+
+.m7-btn_default {
+  color: @btnDefaultFontColor;
+  background-color: @btnDefaultBg;
+
+  &:not(.m7-btn_disabled):visited {
+    color: @btnDefaultFontColor;
+  }
+
+  &:not(.m7-btn_disabled):active {
+    color: @btnDefaultActiveFontColor;
+    background-color: @btnDefaultActiveBg;
+  }
+}
+
+.m7-btn_warn {
+  color: @btnWarnFontColor;
+  background-color: @btnWarnBg;
+
+  &:not(.m7-btn_disabled):visited {
+    color: @btnWarnFontColor;
+  }
+
+  &:not(.m7-btn_disabled):active {
+    color: @btnWarnActiveFontColor;
+    background-color: @btnWarnActiveBg;
+  }
+}
+
+.m7-btn_loading {
+  .m7-loading-icon {
+    margin: -.2em .34em 0 0;
+  }
+
+  &.m7-btn_primary {
+    color: #FFFFFF;
+  }
+
+  &.m7-btn_default {
+    background-color: @btnDefaultActiveBg;
+  }
+
+  &.m7-btn_primary {
+    background-color: @btnPrimaryActiveBg;
+  }
+
+  &.m7-btn_warn {
+    background-color: @btnWarnActiveBg;
+  }
+}
+
+.m7-btn_disabled {
+  color: @btnDisabledFontColor;
+  background-color: @btnDisabledBg;
+}
+
+/*gap between btn*/
+.m7-btn + .m7-btn {
+  margin-top: @btnDefaultGap;
+}

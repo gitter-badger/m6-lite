@@ -1,0 +1,90 @@
+.m7-cells__title {
+  margin-top: @cellGapV;
+  margin-bottom: 3px;
+  padding-left: @cellGapH;
+  padding-right: @cellGapH;
+  color: @textColorDesc;
+  font-size: @cellTipsFontSize;
+  line-height: @cellLineHeight;
+}
+
+.m7-cells__tips {
+  margin-top: .3em;
+  color: @textColorDesc;
+  padding-left: @cellGapH;
+  padding-right: @cellGapH;
+  font-size: @cellTipsFontSize;
+}
+
+.m7-cells {
+  position: relative;
+  margin-top: @cellsMarginTop;
+  background-color: #FFFFFF;
+  line-height: @cellLineHeight;
+  font-size: @cellFontSize;
+  overflow: hidden;
+
+  &:before {
+    .setTopLine();
+  }
+
+  &:after {
+    .setBottomLine();
+  }
+}
+
+.m7-cells__title + .m7-cells {
+  margin-top: 0;
+}
+
+.m7-cell {
+  position: relative;
+  padding: @cellGapV;
+  display: flex;
+  .prefix(align-items, center);
+
+  &:before {
+    .setTopLine();
+    left: @cellGapH;
+  }
+
+  &:first-child:before {
+    display: none;
+  }
+}
+
+.m7-cell__hd {
+
+}
+
+.m7-cell__bd {
+  .prefix(flex, 1)
+}
+
+.m7-cell__ft {
+  text-align: right;
+  color: @textColorDesc;
+}
+
+.m7-cell_warn {
+  color: @colorWarn;
+}
+
+.m7-mask {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .6);
+}
+
+.m7-mask_transparent {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
