@@ -131,7 +131,7 @@ function initEnvFiles() {
   }
 
   // 添加m7运行过程依赖的css文件
-  if (["dev", "build", "release"].includes(mode) && !debug) {
+  if (["build", "release"].includes(mode)) {
     copyFile(PATH.join(path, outputCss), PATH.join(process.cwd(), `./output/compile/css/m7.min.css`), "utf-8");
   }
 }

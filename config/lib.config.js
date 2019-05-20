@@ -10,8 +10,9 @@ const mExternals = require("./webpack/externals");
 const mOptimization = require("./webpack/optimization");
 
 const mode = require("./webpack/Toolkit").getEnv().mode;
-let entry, output;
+let entry, output, devtool;
 if (mode === "libBuild") {
+  devtool = "eval-source-map";
   entry = { index: "./src/m7/index.js" };
   output = {
     path: PATH.join(process.cwd(), "./output/compile/"),
@@ -33,6 +34,7 @@ if (mode === "libBuild") {
 }
 
 module.exports = {
+  devtool,
   entry,
   output,
   plugins: mPlugins.get(),

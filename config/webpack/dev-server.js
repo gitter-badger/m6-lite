@@ -9,6 +9,8 @@ const staticSrc = [
   "/image/favicon.ico",
   "/js/m7-boot.min.js",
   "/js/exif-js.js",
+];
+const compileSrc = [
   "/css/m7.css",
   "/css/m7.min.css",
 ];
@@ -26,14 +28,26 @@ function get() {
     proxy: {
       "/": {
         bypass: (req, res, proxyOptions) => {
-          let originalUrl = req["originalUrl"];
+          let originalUrl = req["originalUrl"], srcFilePath;
           if (staticSrc.includes(originalUrl)) {
-            let rwUrl = `./output/static/${originalUrl.substring(originalUrl.lastIndexOf("/") + 1)}`;
+            srcFilePath = "static";
+          } else {
+            compileSrc.forEach((css) => {
+              if (originalUrl.indexOf(css) !== -1) {
+                srcFilePath = "compile/css";
+                originalUrl = originalUrl.split("?")[0];
+              }
+            });
+          }
+
+          if (srcFilePath) {
+            let rwUrl = `./output/${srcFilePath}/${originalUrl.substring(originalUrl.lastIndexOf("/") + 1)}`;
             res.write(FS.readFileSync(PATH.join(process.cwd(), rwUrl)));
             res.end();
           } else {
             // res.redirect(302, originalUrl);
           }
+
         }
       }
     }
