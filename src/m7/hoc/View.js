@@ -3,60 +3,40 @@
  */
 import React from "react";
 import enhance, { setRef, getRef, mTimeout } from "./Enhance";
-import { instance as worker } from "../dispatch/Dispatcher";
 import ProcessUtils from "../component/process/index";
 
 export const { Provider, Consumer } = React.createContext({});
 
-/** 调用父级函数 */
-/*export function superApply(that, Wrapper, key, args) {
-  let wrapperPrototype = Reflect.getPrototypeOf(Wrapper.prototype);
-  if (Reflect.has(wrapperPrototype, key)) {
-    return Reflect.get(wrapperPrototype, key, that).apply(that, args);
-  } else {
-    return null;
-  }
-}*/
+const GlobalState = {}; // 全局view层数据
 
 export default function View(opts = {}) {
   const { cache = true, namespace } = opts;
 
-  /** 从调度者获取当前页面缓存state */
-  function getStateFormWorker() {
-    if (cache && namespace) {
-      return worker.get(namespace);
-    } else {
-      return null;
-    }
-  }
-
   return function wrapWithConnect(WrapperComponent) {
-    const dead = Symbol("dead");
 
     class HocView extends WrapperComponent {
 
-      state = { ...this["state"], ...getStateFormWorker() }; // 从调度获取当前namespace数据
+      state = { ...this["state"], ...GlobalState[cache && namespace] }; // 从调度获取当前namespace数据
 
-      componentDidMount() {
+      componentDidMount = () => {
         typeof super.componentDidMount === "function" && super.componentDidMount();
         document.documentElement.scrollTop = this.state.lastScrollTop;
-      }
+      };
 
-      componentWillUnmount() {
+      componentWillUnmount = () => {
+        this.setState = function () {}; // 关闭组件销毁后设置state方法
         const action = this.props.history.action;
-        this[dead] = true;
         if (cache && namespace) {
           this.state.lastScrollTop = ~~document.documentElement.scrollTop;
           if (action === "POP") {
             this.state = {}; // 移除历史栈state
           }
-          worker.set(namespace, this.state); // 当前state备份至调度
+          GlobalState[namespace] = this.state; // 当前state备份至调度
         }
         typeof super.componentWillUnmount === "function" && super.componentWillUnmount();
-      }
+      };
 
-      setState = async (state) => {
-        if (this[dead]) return null;
+      setState = (state = {}) => {
         return new Promise((resolve) => {
           super.setState(Object.assign(this.state, state), () => resolve(this.state));
         });
@@ -93,14 +73,14 @@ export default function View(opts = {}) {
         });
       };
 
-      render() {
+      render = () => {
         const value = {
           viewProxy: { get: this.getStateSilence, set: this.setStateSilence, validate: this.validate }
         };
         return <Provider value={value}>
           {super.render()}
         </Provider>;
-      }
+      };
     }
 
     enhance(HocView.prototype, setRef, getRef, mTimeout); // 组件增强
@@ -108,3 +88,13 @@ export default function View(opts = {}) {
     return HocView;
   };
 }
+
+/** 调用父级函数 */
+/*export function superApply(that, Wrapper, key, args) {
+  let wrapperPrototype = Reflect.getPrototypeOf(Wrapper.prototype);
+  if (Reflect.has(wrapperPrototype, key)) {
+    return Reflect.get(wrapperPrototype, key, that).apply(that, args);
+  } else {
+    return null;
+  }
+}*/

@@ -10,13 +10,8 @@ import Notice from "../process/Notice";
 import Picker from "../process/Picker";
 import Loading from "../process/Loading";
 import { history } from "./History";
-import { instance as worker } from "../../dispatch/Dispatcher";
 
 export default class Re extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.worker = props.worker || worker;
-  }
 
   getChildren(children) {
     return React.Children.map(children, (child, i) => {
@@ -24,7 +19,6 @@ export default class Re extends React.PureComponent {
         if (child.props.path) {
           return React["cloneElement"](child, {
             key: i,
-            worker: this.worker
           });
         } else if (child.props.children) {
           return this.getChildren(child.props.children);
@@ -56,11 +50,11 @@ export default class Re extends React.PureComponent {
   }
 
   render() {
-    const { children, path, component, worker, title } = this.props;
+    const { children, path, component, title } = this.props;
     if (children) {
       return this.renderContainer();
     } else {
-      return <Route path={path} exact render={this.renderRoute(component, { path, worker, title })}/>;
+      return <Route path={path} exact render={this.renderRoute(component, { path, title })}/>;
     }
   }
 }
@@ -74,7 +68,6 @@ Re.propTypes = {
   ...Re.propTypes,
   path: PropTypes.string,
   exact: PropTypes.bool,
-  worker: PropTypes.object, // 订阅事务
 
   title: PropTypes.string // 当前地址标题
 };

@@ -15,16 +15,17 @@ export default class Picker extends ProcessComponent {
       setTimeout(() => {
         this.setState({
           show: 0,
-          content: null
+          content: null,
+          contentCls: null
         });
       }, 300);
     }
   }
 
-  onReceive = ({ show = false, content, cancelText, cancel, confirmText, confirm, callback }) => {
+  onReceive = ({ show = false, content, contentCls, cancelText, cancel, confirmText, confirm, callback }) => {
     this.setState({
       show,
-      content,
+      content, contentCls: !show ? this.state.contentCls : contentCls,
       cancelText, cancel,
       confirmText, confirm
     }, callback);
@@ -40,7 +41,7 @@ export default class Picker extends ProcessComponent {
   };
 
   render() {
-    const { show, content, cancelText = "取消", confirmText = "确定" } = this.state;
+    const { show, content, contentCls, cancelText = "取消", confirmText = "确定" } = this.state;
     let rDisplay, maskCls, pickerCls;
     if (show === 0) {
       rDisplay = "none";
@@ -67,7 +68,7 @@ export default class Picker extends ProcessComponent {
           <a href="javascript:" data-action="select" className="m7-picker__action"
              onClick={this.handleClick}>{confirmText}</a>
         </div>
-        <div className="m7-picker__bd">{content}</div>
+        <div className={`m7-picker__bd ${contentCls}`}>{content}</div>
       </div>
     </div>;
   }

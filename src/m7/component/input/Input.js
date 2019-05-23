@@ -46,9 +46,9 @@ export default class Input extends React.Component {
   }
 
   componentDidUpdate(/*prevProps, prevState, snapshot*/) {
-    const { onChange } = this.props, text = this.state.data;
+    const { id, onChange } = this.props, text = this.state.data;
     this["getRef"]("input").value = text;
-    onChange === "function" && onChange({ data: text });
+    typeof onChange === "function" && onChange({ id, data: text });
   }
 
   /** 校验回调 */
