@@ -5,7 +5,7 @@ import React from "react";
 import { setRef, getRef } from "../../hoc/Enhance";
 import TouchEvent from "../../utils/TouchEvent";
 
-const pickerItemHeight = 34; // 元素高度
+const pickerItemHeight = 34; // 元素高度px
 
 export default class DatetimeView extends React.Component {
   constructor(props) {

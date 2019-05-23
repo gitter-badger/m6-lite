@@ -15,7 +15,7 @@ export default class Datetime extends React.PureComponent {
     value: new Date()
   };
 
-  tmpData = new Date();
+  tmpData = new Date(); // 列变动过程变量
 
   static getDerivedStateFromProps(props, state) {
     if (!state.userAction) {
@@ -24,25 +24,35 @@ export default class Datetime extends React.PureComponent {
       if (vData instanceof Date) {
         return { ...state, value: vData, data: vData["format"](format) };
       } else {
-        return state;
+        // 置空
+        return { ...state, value: new Date(), data: "" };
       }
     } else {
       return { ...state, userAction: false };
     }
   }
 
+  componentDidUpdate(prevProps, prevState/*, snapshot*/) {
+    if (prevState.data !== this.state.data) {
+      const { id, onChange } = this.props;
+      typeof onChange === "function" && onChange({ id, data: this.state.data });
+    }
+  }
+
   onClick = () => {
+    const setValue = (value, reset = false) => {
+      const { viewProxy, id, format } = this.props;
+      id && viewProxy.set(id, value);
+      this.setState({ value, data: reset ? "" : value["format"](format), userAction: true });
+    };
+
     ProcessUtils.showPicker({
       content: <DatetimeView format={this.props.format} onChange={this.pickOnChange} value={this.state.value}/>,
+      contentCls: "m7-datetime__bd",
       cancelText: "清空",
-      cancel: () => {
-      },
+      cancel: () => setValue(new Date(), true),
       confirmText: "确定",
-      confirm: () => {
-        const { viewProxy, id } = this.props;
-        id && viewProxy.set(id, this.tmpData);
-        this.setState({ value: this.tmpData, data: this.tmpData["format"](this.props.format), userAction: true });
-      },
+      confirm: () => setValue(this.tmpData, false),
     });
   };
 
@@ -65,5 +75,6 @@ Datetime.defaultProps = {
 Datetime.propTypes = {
   ...Datetime.propTypes,
   title: PropTypes.node,
-  format: PropTypes.string
+  format: PropTypes.string,
+  onChange: PropTypes.func
 };

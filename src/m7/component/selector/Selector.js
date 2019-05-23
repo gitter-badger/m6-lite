@@ -4,12 +4,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Datetime from "./Datetime";
+import Dict from "./Dict";
 
 export default class Selector extends React.PureComponent {
   render() {
     const { type } = this.props;
     if (type === "dict") {
-      // 字典
+      return <Dict {...this.props}/>;
     } else if (type === "datetime") {
       return <Datetime {...this.props}/>;
     }

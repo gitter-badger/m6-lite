@@ -9,6 +9,11 @@
   }
 }
 
+.m7-datetime__bd {
+  display: flex;
+  height: @datetimeContentHeight;
+}
+
 .m7-datetime__group {
   flex: 1;
   position: relative;
@@ -32,7 +37,7 @@
 
 .m7-datetime__indicator {
   width: 100%;
-  height: @pickerItemHeight;
+  height: @datetimeItemHeight;
   position: absolute;
   left: 0;
   top: 102px;
@@ -55,21 +60,27 @@
   &:before {
     content: " ";
     display: block;
-    height: 3 * @pickerItemHeight;
+    height: 3 * @datetimeItemHeight;
   }
   &:after {
     content: " ";
     display: block;
-    height: 3 * @pickerItemHeight;
+    height: 3 * @datetimeItemHeight;
   }
 }
 
 .m7-datetime__item {
-  height: @pickerItemHeight;
-  line-height: @pickerItemHeight;
+  height: @datetimeItemHeight;
+  line-height: @datetimeItemHeight;
   text-align: center;
   color: @textColorTitle;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+
+// 字典筛选器
+.m7-dict__bd {
+  height: @dictContentHeight;
 }
