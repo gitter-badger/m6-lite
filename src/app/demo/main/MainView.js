@@ -21,8 +21,14 @@ export default class MainView extends React.Component {
     this.props.history["push"]({ pathname: "/main2" });
   };
 
-  sClick = () => {
+  /** 设置值 */
+  setClick = () => {
     this.setState({ sjhm: "13800138000", date: new Date(2018, 7, 8) });
+  };
+
+  /** 清空 */
+  clearClick = () => {
+    this.setState({ sjhm: '', pwd: '', yzm: '', time: null, date: null });
   };
 
   gClick = () => {
@@ -101,8 +107,10 @@ export default class MainView extends React.Component {
         <M7.Selector id="time" title="时间" type="datetime"/>
         <M7.Selector id="date" title="日期" placeholder="请选择日期" type="datetime" format="yyyy/MM/dd"
                      rules={[{ type: this.rqCheck, message: "请选择日期" }]}/>
+        <M7.Selector id="dict" title="字典" type="dict"/>
       </div>
-      <M7.Button title="设置" type="primary" onClick={this.sClick}/>
+      <M7.Button title="设置" type="primary" onClick={this.setClick}/>
+      <M7.Button title="清空" type="default" onClick={this.clearClick}/>
       <M7.Button title="获取输出" type="default" onClick={this.gClick}/>
       <M7.Button title="跳转" type="warn" onClick={this.bClick}/>
       <M7.Button title="校验" type="default" status={this.state.checkStatus} onClick={this.cClick}/>
