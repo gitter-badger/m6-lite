@@ -3,6 +3,7 @@
  * Created by XLBerry on 2019/5/6
  */
 
+/*
 const SK = Symbol("Subscriber");
 
 export default function PubSub() {
@@ -35,4 +36,4 @@ PubSub.prototype = {
     }
     return this;
   }
-};
+};*/

@@ -2,6 +2,7 @@
  * 调度中心
  * Created by XLBerry on 2019/5/6
  */
+/*
 import DataSet from "./DataSet";
 import PubSub from "./PubSub";
 
@@ -30,4 +31,4 @@ Dispatcher.prototype = {
   }
 };
 
-export const instance = new Dispatcher();
+export const instance = new Dispatcher();*/

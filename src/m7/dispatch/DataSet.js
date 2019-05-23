@@ -2,6 +2,7 @@
  * Created by XLBerry on 2019/5/5
  */
 
+/*
 const DSK = Symbol("DataSetKey");
 
 export default function DataSet(data = {}) {
@@ -54,4 +55,4 @@ DataSet.prototype = {
     pData[keys[length]] = value;
     return this;
   }
-};
+};*/
