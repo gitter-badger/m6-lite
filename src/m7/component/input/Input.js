@@ -4,9 +4,9 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import Element from "../../hoc/Element";
+import create from "../../hoc/WrapComponent";
 
-@Element()
+@create({ type: "element" })
 export default class Input extends React.Component {
 
   state = {
@@ -46,9 +46,9 @@ export default class Input extends React.Component {
   }
 
   componentDidUpdate(/*prevProps, prevState, snapshot*/) {
-    const { id, onChange } = this.props, text = this.state.data;
-    this["getRef"]("input").value = text;
-    typeof onChange === "function" && onChange({ id, data: text });
+    const { id, onChange } = this.props, data = this.state.data;
+    this["getRef"]("input").value = data;
+    typeof onChange === "function" && onChange({ id, type: "input", data });
   }
 
   /** 校验回调 */
