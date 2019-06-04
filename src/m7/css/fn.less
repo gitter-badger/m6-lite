@@ -1,3 +1,10 @@
+/**
+变量作为左侧属性的话
+.xx(@param, @value...) {
+  @{param}: @value;
+}
+ */
+
 .prefix(@style; @value...) {
   -webkit-@{style}: @value;
     @{style}: @value;
@@ -14,35 +21,56 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.setLine(@style; @top: 0; @right: 0; @bottom: 0; @left: 0; @z-index: 2; @scale; @lineColor) {
+.setLeftLine(@lineColor: rgba(0, 0, 0, 0.1)) {
   content: " ";
   position: absolute;
-  z-index: @z-index;
-  top: @top;
-  right: @right;
-  bottom: @bottom;
-  left: @left;
+  top: 0;
+  bottom: 0;
+  left: 0;
   height: 1px;
-    @{style}: 1px solid @lineColor;
+  border-left: 1px solid @lineColor;
   color: @lineColor;
   .prefix(transform-origin, 0 0);
-  .prefix(transform, @scale);
-}
-
-.setLeftLine(@lineColor: rgba(0, 0, 0, 0.1)) {
-  .setLine(border-left, 0, auto, 0, 0, 2, scaleX(0.5), @lineColor);
+  .prefix(transform, scaleX(0.5));
 }
 
 .setTopLine(@lineColor: rgba(0, 0, 0, 0.1)) {
-  .setLine(border-top, 0, 0, auto, 0, 2, scaleY(0.5), @lineColor);
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  border-top: 1px solid @lineColor;
+  color: @lineColor;
+  .prefix(transform-origin, 0 0);
+  .prefix(transform, scaleY(0.5));
 }
 
 .setRightLine(@lineColor: rgba(0, 0, 0, 0.1)) {
-  .setLine(border-right, 0, 0, 0, auto, 2, scaleX(0.5), @lineColor);
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  border-right: 1px solid @lineColor;
+  color: @lineColor;
+  .prefix(transform-origin, 0 0);
+  .prefix(transform, scaleX(0.5));
 }
 
 .setBottomLine(@lineColor: rgba(0, 0, 0, 0.1)) {
-  .setLine(border-bottom, auto, 0, 0, 0, 2, scaleY(0.5), @lineColor);
+  content: " ";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  border-bottom: 1px solid @lineColor;
+  color: @lineColor;
+  .prefix(transform-origin, 0 100%);
+  .prefix(transform, scaleY(0.5));
 }
 
 .arrowDefault(@size; @color; @land) {
