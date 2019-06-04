@@ -1,13 +1,17 @@
 .keyframes(slideUp, { from {
-  transform: translate3d(0, 100%, 0);
+  .prefix(transform, translate3d(0, 100%, 0));
+  //opacity: 0;
 } to {
-    transform: translate3d(0, 0, 0);
+    .prefix(transform, translate3d(0, 0, 0));
+    //opacity: 1;
   } });
 
 .keyframes(slideDown, { from {
-  transform: translate3d(0, 0, 0);
+  .prefix(transform, translate3d(0, 0, 0));
+  //opacity: 1;
 } to {
-    transform: translate3d(0, 100%, 0);
+    .prefix(transform, translate3d(0, 100%, 0));
+    //opacity: 0;
   } });
 
 .keyframes(fadeIn, { from {
@@ -23,17 +27,17 @@
   } });
 
 .m7-animate-slide-up {
-  animation: slideUp ease .3s forwards;
+  .prefix(animation, slideUp ease .3s forwards);
 }
 
 .m7-animate-slide-down {
-  animation: slideDown ease .3s forwards;
+  .prefix(animation, slideDown ease .3s forwards);
 }
 
 .m7-animate-fade-in {
-  animation: fadeIn ease .3s forwards;
+  .prefix(animation, fadeIn ease .3s forwards);
 }
 
 .m7-animate-fade-out {
-  animation: fadeOut ease .3s forwards;
+  .prefix(animation, fadeOut ease .3s forwards);
 }
