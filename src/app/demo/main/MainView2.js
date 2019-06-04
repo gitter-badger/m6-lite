@@ -5,7 +5,7 @@
 import React from "react";
 import M7 from "m7";
 
-@M7.View({ namespace: "main-view2" })
+@M7.create({ namespace: "main-view2" })
 export default class MainView extends React.Component {
   constructor(props) {
     super(props);

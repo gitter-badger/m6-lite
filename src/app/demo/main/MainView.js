@@ -5,7 +5,7 @@
 import React from "react";
 import M7 from "m7";
 
-@M7.View({ namespace: "main-view" })
+@M7.create({ namespace: "main-view" })
 export default class MainView extends React.Component {
 
   state = {
@@ -18,7 +18,7 @@ export default class MainView extends React.Component {
 
   bClick = () => {
     console.log(this.state);
-    this.props.history["push"]({ pathname: "/main2" });
+    this.props.history["push"]({ pathname: "/dict" });
   };
 
   /** 设置值 */
@@ -104,10 +104,9 @@ export default class MainView extends React.Component {
         <M7.Input id="yzm" title="验证码" disabled={this.state.disabled} placeholder="请输入验证码" onChange={this.onChange}
                   rules={[{ type: this.yzmCheck, message: "验证码不正确" }]}
                   ft={<div style={{ color: '#576B95' }}>获取验证码</div>}/>
-        <M7.Selector id="time" title="时间" type="datetime"/>
+        <M7.Selector id="time" title="时间" placeholder="请选择时间" type="datetime"/>
         <M7.Selector id="date" title="日期" placeholder="请选择日期" type="datetime" format="yyyy/MM/dd"
                      rules={[{ type: this.rqCheck, message: "请选择日期" }]}/>
-        <M7.Selector id="dict" title="字典" type="dict"/>
       </div>
       <M7.Button title="设置" type="primary" onClick={this.setClick}/>
       <M7.Button title="清空" type="default" onClick={this.clearClick}/>
