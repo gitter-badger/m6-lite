@@ -22,18 +22,22 @@ export default class Picker extends ProcessComponent {
     }
   }
 
-  onReceive = ({ show = false, content, contentCls, cancelText, cancel, confirmText, confirm, callback }) => {
-    this.setState({
+  onReceive = ({ show = false, content, contentCls, cancelText, cancel, confirmText, confirm, miss, callback }) => {
+    this.state.show !== false && this.setState({
       show,
-      content, contentCls: !show ? this.state.contentCls : contentCls,
+      content: !show ? this.state.content : content,
+      contentCls: !show ? this.state.contentCls : contentCls,
       cancelText, cancel,
-      confirmText, confirm
+      confirmText, confirm,
+      miss
     }, callback);
   };
 
   handleClick = (e) => {
     const action = e.target.dataset["action"];
-    if (action === "cancel") {
+    if (action === "miss") {
+      this.onReceive({ show: false, callback: this.state.miss });
+    } else if (action === "cancel") {
       this.onReceive({ show: false, callback: this.state.cancel });
     } else if (action === "select") {
       this.onReceive({ show: false, callback: this.state.confirm });
@@ -60,13 +64,15 @@ export default class Picker extends ProcessComponent {
     }
 
     return <div style={{ display: rDisplay }}>
-      <div data-action="cancel" className={`m7-mask ${maskCls}`} onClick={this.handleClick}/>
+      <div data-action="miss" className={`m7-mask ${maskCls}`} onClick={this.handleClick}/>
       <div className={`m7-picker ${pickerCls}`}>
         <div className="m7-picker__hd">
-          <a href="javascript:" data-action="cancel" className="m7-picker__action"
-             onClick={this.handleClick}>{cancelText}</a>
-          <a href="javascript:" data-action="select" className="m7-picker__action"
-             onClick={this.handleClick}>{confirmText}</a>
+          <a href="javascript:" className="m7-picker__action">
+            <span data-action="cancel" onClick={this.handleClick}>{cancelText}</span>
+          </a>
+          <a href="javascript:" className="m7-picker__action">
+            <span data-action="select" onClick={this.handleClick}>{confirmText}</span>
+          </a>
         </div>
         <div className={`m7-picker__bd ${contentCls}`}>{content}</div>
       </div>
