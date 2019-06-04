@@ -2,7 +2,9 @@
  * Created by XLBerry on 2019/5/16
  */
 
-export default class TouchEvent {
+import { setTransform, getTransform } from "../../css/CSSPrefix";
+
+export default class TransformTouch {
 
   state = {
     startTranslateY: 0, // 动作开始，当前布局对象位移Y
@@ -14,37 +16,28 @@ export default class TouchEvent {
     endClientY: 0, // 触点结束位置
   };
 
-  constructor({ container, target, callback }) {
-    this.container = container;
+  constructor({ target, callback }) {
     this.target = target;
     this.callback = typeof callback === "function" ? callback : () => {};
-    if (this.container && typeof this.container.addEventListener === "function") {
-      this.container.addEventListener("touchstart", this.touchStart, false);
-      this.container.addEventListener("touchmove", this.touchMove, false);
-      this.container.addEventListener("touchend", this.touchEnd, false);
-
-      if (this.target.style.transform.indexOf("translate3d") !== -1) {
-        let initTranslate = this.target.style.transform.replace("translate3d(", "").replace(")", "").replaceAll("px", "").split(", ");
-        this.state.endTranslateY = ~~initTranslate[1];
-      }
-    }
+    this.target.addEventListener("touchstart", this.touchStart, false);
+    this.target.addEventListener("touchmove", this.touchMove, false);
+    this.target.addEventListener("touchend", this.touchEnd, false);
+    this.state.endTranslateY = getTransform(this.target)[1];
   }
 
   unBind() {
-    if (this.container && typeof this.container.addEventListener === "function") {
-      this.container.removeEventListener("touchstart", this.touchStart);
-      this.container.removeEventListener("touchmove", this.touchMove);
-      this.container.removeEventListener("touchend", this.touchEnd);
-    }
+    this.target.removeEventListener("touchstart", this.touchStart);
+    this.target.removeEventListener("touchmove", this.touchMove);
+    this.target.removeEventListener("touchend", this.touchEnd);
   }
 
   touchStart = (e) => {
     e.preventDefault();
     const { clientY } = e.touches[0];
-    this.state.startClientY = clientY;
-    this.state.startTranslateY = this.state.endTranslateY;
+    this.state.startClientY = this.state.endClientY = clientY;
+    this.state.startTranslateY = this.state.endTranslateY = getTransform(this.target)[1];
     this.target.style.transition = `all 0s linear 0s`;
-    this.state.maxTranslateY = this.target.clientHeight - this.container.clientHeight;
+    this.state.maxTranslateY = this.target.clientHeight - this.target.parentNode.clientHeight;
     this.state.startTime = Date.now();
   };
 
@@ -52,31 +45,37 @@ export default class TouchEvent {
     e.preventDefault();
     this.state.endClientY = e.touches[0].clientY;
     this.state.endTranslateY = this.state.endClientY - this.state.startClientY + this.state.startTranslateY;
-    this.target.style.transform = `translate3d(0px, ${this.state.endTranslateY}px, 0px)`;
+    setTransform(this.target, "0px", `${this.state.endTranslateY}px`);
   };
 
   touchEnd = (e) => {
     e.preventDefault();
+    let clickNode = null; // 点击的节点
     this.target.style.transition = `all 0.3s ease-out 0s`;
 
     if (this.state.maxTranslateY < 0) {
       // 内容比容器高度小
       // 回归到顶部原始位置
-      this.target.style.transform = `translate3d(0px, 0px, 0px)`;
+      setTransform(this.target);
       this.state.endTranslateY = 0;
     } else {
       if (this.state.endTranslateY > 0) {
         // 回归到顶部原始位置
-        this.target.style.transform = `translate3d(0px, 0px, 0px)`;
+        setTransform(this.target);
         this.state.endTranslateY = 0;
       } else if (this.state.endTranslateY < -this.state.maxTranslateY) {
         // 回归到底部位置
-        this.target.style.transform = `translate3d(0px, ${-this.state.maxTranslateY}px, 0px)`;
+        setTransform(this.target, "0px", `${-this.state.maxTranslateY}px`);
         this.state.endTranslateY = -this.state.maxTranslateY;
+        if (this.state.endClientY - this.state.startClientY === 0) {
+          clickNode = e.target; // 没有移动，只是点击
+        }
       } else {
         // 内容滚动，触发惯性滚动
         let diffMS = Date.now() - this.state.startTime, diffClientY = this.state.endClientY - this.state.startClientY;
-        if (diffMS < 300) {
+        if (diffClientY === 0) {
+          clickNode = e.target; // 没有移动，只是点击
+        } else if (diffMS < 300) {
           let speed = Math.abs(diffClientY) / diffMS; // 手势速度
           let inertiaHeight = speed * 100; // 惯性滑动距离
           if (diffClientY > 0) {
@@ -95,12 +94,12 @@ export default class TouchEvent {
             }
           }
           this.state.endTranslateY = inertiaHeight;
-          this.target.style.transform = `translate3d(0px, ${this.state.endTranslateY}px, 0px)`;
+          setTransform(this.target, "0px", `${this.state.endTranslateY}px`);
         }
       }
     }
 
-    this.callback({ translateY: this.state.endTranslateY });
+    this.callback({ clickNode, translateY: this.state.endTranslateY });
   };
 
   setTranslate = ({ translateX = 0, translateY, translateZ = 0 }) => {
