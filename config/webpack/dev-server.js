@@ -25,6 +25,7 @@ function get() {
     historyApiFallback: true,
     inline: true,
     contentBase: `./${toolKit.getEnv().mode}`,
+    stats: "minimal",
     proxy: {
       "/": {
         bypass: (req, res, proxyOptions) => {
