@@ -10,7 +10,8 @@ function get() {
     alias: {}
   };
   if (mode === "dev" && debug) {
-    resolve.modules.unshift(buildSrc); // 调试M7内核，文件夹命名m7
+    // resolve.modules.unshift(buildSrc); // 调试M7内核，文件夹命名m7
+    resolve.alias["m7$"] = `${buildSrc}m7/index.js`; // 调试M7内核，文件夹命名m7
   }
   return resolve;
 }

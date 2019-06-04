@@ -18,7 +18,10 @@ module.exports = {
   entry: mEntry.get(),
   output: mOutput.target(),
   plugins: mPlugins.get(),
-  module: { rules: mRules.get() },
+  module: {
+    noParse: /node_modules\/(jquey|moment|chart\.js)/, // 去除一些编译的文件
+    rules: mRules.get()
+  },
   resolve: mResolve.get(),
   externals: mExternals.get(),
   optimization: mOptimization.get(),
