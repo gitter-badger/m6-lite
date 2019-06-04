@@ -49,7 +49,7 @@ function getHtmlPages() {
       title: title || "M6-Lite",
       icon: favicon,
       env: {
-        id,
+        id, title,
         version,
         // env: toolKit.getEnv(),
         css: denpOnCSS.concat(css),

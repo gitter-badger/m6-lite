@@ -45,7 +45,8 @@ export default class Re extends React.PureComponent {
     </BasalRouter>;
   }
 
-  renderRoute(Component, otherProps = {}) {
+  renderRoute(Component, otherProps) {
+    document.title = otherProps.title || window.M7GET("env").title; // 设置网页标题
     return (props) => <Component {...props} {...otherProps}/>;
   }
 
