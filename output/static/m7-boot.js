@@ -3,6 +3,9 @@
  * Created by XLBerry on 2018/10/30
  */
 
+/** 空函数 */
+function EFNC() {}
+
 (function () {
   "use strict";
 
@@ -16,15 +19,10 @@
    */
   window.M7SET = function (key, value) {
     if (!key) return false;
-    let target = window.M7SCOPE, nds = key.split("."), length = nds.length;
-    for (let i = 0, le = length - 1; i < le; i++) {
-      if (!target[nds[i]]) {
-        target[nds[i]] = {};
-      }
-      target = target[nds[i]];
+    else {
+      window.M7SCOPE[key] = value;
+      return true;
     }
-    target[nds[length - 1]] = value;
-    return true;
   };
 
   /**
@@ -35,24 +33,16 @@
    * @constructor
    */
   window.M7GET = function (key, dValue) {
-    try {
-      let r = eval(`window.M7SCOPE.${key}`);
-      return r === undefined ? dValue : r;
-    } catch (e) {
-      return dValue; // void 0;
-    }
+    let value = window.M7SCOPE[key];
+    return value === undefined ? dValue : value; // void 0;
   };
-
-  /** 空函数 */
-  function emptyFn() {
-  }
 
   /**
    * 动态载入js
    * @param obj --> url, type, success, fail
    */
   function addScript(obj) {
-    const { url, type = "url", success = emptyFn, fail } = obj;
+    const { url, type = "url", success = EFNC, fail } = obj;
     let script = document.createElement("script");
     script.type = "text/javascript"; // script.async = 'async';
     if (type === "url") {
@@ -74,9 +64,16 @@
 
   /** 载入js对象 */
   window.M7SET("loadScript", function (obj = {}) {
-    const { url, test, success = emptyFn, fail = emptyFn, delay = 1000 } = obj;
+    const { url, test, success = EFNC, fail = EFNC, delay = 1000 } = obj;
 
-    if (eval(test) !== null) {
+    let testFlag = false;
+    if (typeof test === "string") {
+      testFlag = eval(test);
+    } else if (typeof test === "function") {
+      testFlag = test();
+    }
+
+    if (testFlag) {
       success(true);
     } else {
       if (__loadScript[url]) {
@@ -107,10 +104,9 @@
 
   function contentLoaded() {
     document.removeEventListener("DOMContentLoaded", contentLoaded);
-    window.M7SET("env", function () {
-      return JSON.parse(document.getElementById("m7-boot-config").innerText || "{}");
-    });
-    let asyncJS = (window.M7GET("env")()).asyncJS, count = 0, totalCount = asyncJS.length;
+    let appEnv = JSON.parse(document.getElementById("m7-boot-config").innerText || "{}");
+    window.M7SET("env", appEnv);
+    let asyncJS = appEnv.asyncJS, count = 0, totalCount = asyncJS.length;
 
     function cb(flag) {
       if (flag === true) {
