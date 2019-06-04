@@ -6,16 +6,18 @@ require("./utils/Prototype");
 import "./index.less";
 
 import Re from "./component/router/Re";
-import View from "./hoc/View";
+import create from "./hoc/WrapComponent";
 
 import Button from "./component/form/Button";
 import Input from "./component/input/Input";
 import Selector from "./component/selector/Selector";
+import List from "./component/list/List";
 import ProcessUtils from "./component/process/index";
 
 export default {
   Re,
-  View,
+  create,
   Button, Input, Selector,
+  List,
   ...ProcessUtils,
 };
