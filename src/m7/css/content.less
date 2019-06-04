@@ -1,3 +1,14 @@
+.m7-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
 .m7-cells__title {
   margin-top: @cellGapV;
   margin-bottom: 3px;
@@ -87,4 +98,9 @@
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+/** 屏蔽用户动作，事件穿透 */
+.m7-pointer-events--none {
+  pointer-events: none;
 }
