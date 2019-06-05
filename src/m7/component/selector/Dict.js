@@ -13,18 +13,22 @@ import DictView from "./DictView";
 export default class Dict extends React.PureComponent {
 
   state = {
-    data: []
+    data: [],
+    dataLabel: []
   };
   tmpData = []; // 临时数据
+  tmpDataLabel = []; // 临时数据标签
 
   static getDerivedStateFromProps(props, state) {
     if (!state.userAction) {
-      const { viewProxy, id, splitKey } = props;
+      const { viewProxy, id, displayRender, splitKey } = props;
       const vData = viewProxy.get(id);
       if (Array.isArray(vData)) {
-        return { ...state, data: vData, value: vData.map(v => v.detail).join(splitKey) };
+        const newState = { ...state, data: vData, dataLabel: viewProxy.get(`${id}#label`) || [] };
+        newState.value = vData.map((v, i) => displayRender({ value: v, label: newState.dataLabel[i] })).join(splitKey);
+        return newState;
       } else {
-        return { ...state, data: [], value: "" }; // 置空
+        return { ...state, data: [], dataLabel: [], value: "" }; // 置空
       }
     } else {
       return { ...state, userAction: false };
@@ -39,28 +43,33 @@ export default class Dict extends React.PureComponent {
   }
 
   onClick = () => {
-    const { mode, searchable, viewProxy, id, splitKey, dataFor } = this.props;
-    const setStateData = (data, reset = false) => {
-      this.setState({
-        data,
-        value: reset ? "" : data.map(v => v.detail).join(splitKey),
+    const { multiple, cascade, displayRender, searchable, viewProxy, id, splitKey, dataFor } = this.props;
+    const setStateData = async ({ checked, checkedLabel }, reset = false) => {
+      await this.setState({
+        data: checked,
+        dataLabel: checkedLabel,
+        value: reset ? "" : checked.map((v, i) => displayRender({ value: v, label: checkedLabel[i] })).join(splitKey),
         userAction: true
-      }, () => {
-        id && viewProxy.set(id, this.state.data);
       });
+      if (id) {
+        viewProxy.set(id, this.state.data);
+        cascade && viewProxy.set(`${id}#label`, this.state.dataLabel);
+      }
     };
     ProcessUtils.showPicker({
-      content: <DictView data={this.state.data} mode={mode} searchable={searchable} onChange={this.handleOnChange} dataFor={dataFor}/>,
+      content: <DictView data={this.state.data} dataLabel={this.state.dataLabel}
+                         multiple={multiple} cascade={cascade} searchable={searchable}
+                         onChange={this.handleOnChange} dataFor={dataFor}/>,
       contentCls: "m7-dict__bd",
       cancelText: "清空",
-      cancel: () => setStateData([], true),
-      confirm: () => setStateData(this.tmpData, false),
+      cancel: () => setStateData({ checked: [], checkedLabel: [] }, true),
+      confirm: () => setStateData({ checked: this.tmpData, checkedLabel: this.tmpDataLabel }, false),
     });
   };
 
-  handleOnChange = (checkedData) => {
-    console.log(checkedData);
-    this.tmpData = [].concat(checkedData);
+  handleOnChange = ({ checked, checkedLabel }) => {
+    this.tmpData = checked;
+    this.tmpDataLabel = checkedLabel;
   };
 
   render() {
@@ -72,8 +81,9 @@ export default class Dict extends React.PureComponent {
 
 Dict.defaultProps = {
   ...Dict.defaultProps,
-  mode: "single",
+  multiple: false,
   cascade: false,
+  displayRender: ({ value/*, label*/ }) => value.detail,
   splitKey: "，",
   searchable: false,
   dataFor: {},
@@ -82,9 +92,10 @@ Dict.defaultProps = {
 Dict.propTypes = {
   ...Dict.propTypes,
   title: PropTypes.node,
-  mode: PropTypes.oneOf(["single", "multiple"]).isRequired,
+  multiple: PropTypes.bool,
   cascade: PropTypes.bool, // 级联模式
   splitKey: PropTypes.string, // 字典detail切割符
+  displayRender: PropTypes.func, // 显示文字函数处理
   searchable: PropTypes.bool, // 搜索条
   onChange: PropTypes.func,
   dataFor: PropTypes.object, // 数据来源对象

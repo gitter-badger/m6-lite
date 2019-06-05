@@ -89,16 +89,46 @@
 // 字典筛选器
 .m7-dict__bd {
   height: @dictContentHeight;
-  background-color: #fff;
+  background-color: @bgColorDefault;
 }
 
-.m7-dict__bd__list--search {
+// 字典标签
+.m7-dict__label {
   position: relative;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  height: @dictContentHeight - @searchInputHeight - 8 * 2;
-  background-color: #ededed;
-  margin: auto;
+  min-height: @dictLabelHeight;
+  background-color: #ffffff;
+  color: @textColorDesc;
+  padding: 0 @cellGapV;
+  pointer-events: none;
+
+  label {
+    float: left;
+    height: @dictLabelHeight;
+    line-height: @dictLabelHeight;
+    font-size: 0.9em;
+    pointer-events: auto;
+
+    &:after {
+      content: "/";
+      padding: 0 4px;
+    }
+  }
+
+  :last-child {
+    color: @linkColorDefault;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  &:after {
+    .setBottomLine();
+  }
+
+  &:empty {
+    display: none;
+  }
 }
 
 .m7-dict__bd__list {
@@ -106,8 +136,20 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   height: @dictContentHeight;
-  background-color: #ededed;
+  background-color: @bgColorDefault;
   margin: auto;
+
+  &.label {
+    height: @dictContentHeight - @dictLabelHeight;
+  }
+
+  &.search {
+    height: @dictContentHeight - @dictSearchHeight;
+  }
+
+  &.label.search {
+    height: @dictContentHeight - @dictLabelHeight - @dictSearchHeight;
+  }
 }
 
 .m7-dict__bd__list__item {
@@ -115,12 +157,13 @@
   padding: @cellGapV;
 
   &:active {
-    background-color: #ededed;
+    background-color: @bgColorDefault;
   }
 }
 
 .m7-dict__bd__list__item--checked {
   min-width: 16px;
+
   &:before {
     display: block;
     content: '\EA08';
