@@ -668,7 +668,7 @@ textarea {
   padding: 8px;
   display: flex;
   box-sizing: border-box;
-  background-color: #EDEDED;
+  background-color: #ededed;
   -webkit-text-size-adjust: 100%;
   align-items: center;
 }
@@ -893,15 +893,49 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .m7-dict__bd {
   height: 400px;
-  background-color: #fff;
-}
-.m7-dict__bd__list--search {
-  position: relative;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  height: 352px;
   background-color: #ededed;
-  margin: auto;
+}
+.m7-dict__label {
+  position: relative;
+  min-height: 40px;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 0 16px;
+  pointer-events: none;
+}
+.m7-dict__label label {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  font-size: 0.9em;
+  pointer-events: auto;
+}
+.m7-dict__label label:after {
+  content: "/";
+  padding: 0 4px;
+}
+.m7-dict__label :last-child {
+  color: #576B95;
+}
+.m7-dict__label :last-child:after {
+  display: none;
+}
+.m7-dict__label:after {
+  content: " ";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+.m7-dict__label:empty {
+  display: none;
 }
 .m7-dict__bd__list {
   position: relative;
@@ -910,6 +944,15 @@ input[type="search"]::-webkit-search-results-decoration {
   height: 400px;
   background-color: #ededed;
   margin: auto;
+}
+.m7-dict__bd__list.label {
+  height: 360px;
+}
+.m7-dict__bd__list.search {
+  height: 352px;
+}
+.m7-dict__bd__list.label.search {
+  height: 312px;
 }
 .m7-dict__bd__list__item {
   background-color: #ffffff;
