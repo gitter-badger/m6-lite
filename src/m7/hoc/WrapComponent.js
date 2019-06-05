@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 import ProcessUtils from "../component/process";
 
 export const { Provider, Consumer } = React.createContext({});
@@ -158,6 +159,18 @@ export default function wrapper(opts = {}) {
       };
 
     }
+
+    Hoc.defaultProps = {
+      ...Hoc.defaultProps,
+      subclass: false,
+      className: ""
+    };
+
+    Hoc.propTypes = {
+      ...Hoc.propTypes,
+      subclass: PropTypes.bool,
+      id: PropTypes.string, // 数据标识
+    };
 
     const hocForwardRef = React.forwardRef((props, ref) => {
       if (Type === "element") {
