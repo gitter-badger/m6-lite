@@ -21,7 +21,8 @@
     "lib:build": "rimraf node_modules/m7 && cross-env env={\\\"mode\\\":\\\"libBuild\\\"} webpack --mode development --progress --colors --config ./config/lib.config.js && copy .\\\\src\\\\m7\\\\index.d.ts .\\\\output\\\\compile\\\\*.ts",
     "lib:release": "rimraf node_modules/m7 && cross-env env={\\\"mode\\\":\\\"libRelease\\\"} webpack --mode production --progress --colors --config ./config/lib.config.js",
     "update": "npm-check -u",
-    "clean": "rimraf node_modules/m7 && rimraf output/compile"
+    "clean": "rimraf node_modules/m7 && rimraf output/compile",
+    "release:docs": "xcopy /e /y .\\output\\release .\\docs"
   },
   "dependencies": {
     "history": "^4.9.0",

@@ -8,16 +8,14 @@ import M7 from "m7";
 import "./app.less";
 require.context("../../res");
 
-import MainView from "./main/MainView";
-import MainView2 from "./main/MainView2";
-import MainView3 from "./main/MainView3";
-
+import IndexView from "./index/IndexView";
+import MyButton from "./button/MyButton";
+import MyInput from "./input/MyInput";
 import MyDict from "./dict/MyDict";
 
 ReactDOM.render(<M7.Re>
-  <M7.Re path="/" component={MainView}/>
-  <M7.Re path="/main2" component={MainView2} title="主页2"/>
-  <M7.Re path="/main3" component={MainView3} title="主页3"/>
-
+  <M7.Re path="/" component={IndexView}/>
+  <M7.Re path="/button" component={MyButton} title="按钮"/>
+  <M7.Re path="/input" component={MyInput} title="输入框"/>
   <M7.Re path="/dict" component={MyDict} title="字典"/>
 </M7.Re>, document.getElementById("m7-main"));
