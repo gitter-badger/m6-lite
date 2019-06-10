@@ -1,4 +1,5 @@
 /**
+ * input定义非受控组件
  * Created by XLBerry on 2019/5/6
  */
 
@@ -10,7 +11,7 @@ import create from "../../hoc/WrapComponent";
 export default class Input extends React.Component {
 
   state = {
-    data: this.props.viewProxy.get(this.props.id),
+    data: this.props.viewProxy.get(this.props.id) || this.props.value,
     userAction: false // 交互变更，事件消耗
   };
 
@@ -20,13 +21,11 @@ export default class Input extends React.Component {
       return { ...state, data: value };
     } else {
       const vData = viewProxy.get(id), { data, userAction } = state;
-      if (vData !== data) {
-        if (userAction) {
-          viewProxy.set(id, data); // 告知页面数据，交互变更当前数据
-          return { data, userAction: false }; // 交互变更，比如手动输入
-        } else {
-          return { data: vData }; // 页面数据行为
-        }
+      if (userAction) {
+        viewProxy.set(id, data); // 告知页面数据，交互变更当前数据
+        return { data, userAction: false }; // 交互变更，比如手动输入
+      } else if (vData !== data) {
+        return { data: vData }; // 页面数据行为
       } else {
         return null;
       }
@@ -47,13 +46,13 @@ export default class Input extends React.Component {
 
   componentDidUpdate(/*prevProps, prevState, snapshot*/) {
     const { id, onChange } = this.props, data = this.state.data;
-    this["getRef"]("input").value = data;
+    this.getRef("input").value = data || ""; // 来自外部设置value
     typeof onChange === "function" && onChange({ id, type: "input", data });
   }
 
   /** 校验回调 */
   onValidate = (errText) => {
-    let parent = this["getRef"]("input").parentNode.parentNode,
+    let parent = this.getRef("input").parentNode.parentNode,
       fts = parent.getElementsByClassName("m7-cell__ft")[0].children, icon = fts[0];
     if (errText) {
       parent.classList.add("m7-cell_warn");
@@ -71,22 +70,24 @@ export default class Input extends React.Component {
   onFocus = (e) => typeof this.props.onFocus === "function" && this.props.onFocus(e);
 
   onBlur = (e) => {
-    const value = e.target.value;
+    const { id, onChange } = this.props, value = e.target.value;
     if ((this.state.data || "") !== value) {
-      this.setState({ data: value, userAction: true });
+      this.setState({ data: value, userAction: true }, () => {
+        typeof onChange === "function" && onChange({ id, type: "input", data: value });
+      });
     }
   };
 
   render() {
-    const { className, title, placeholder, type, disabled, readOnly, onInput, ft, value } = this.props;
+    const { className, title, placeholder, type, disabled, readOnly, onInput, ft } = this.props;
     return <div className="m7-cell">
       {title ? <div className="m7-cell__hd">
         <label className="m7-label">{title}</label>
       </div> : null}
       <div className="m7-cell__bd">
-        <input ref={this["setRef"]("input")} className={`m7-input ${className}`} placeholder={placeholder} type={type}
+        <input ref={this.setRef("input")} className={`m7-input ${className}`} placeholder={placeholder} type={type}
                onClick={this.onClick} onFocus={this.onFocus} onInput={onInput} onBlur={this.onBlur}
-               disabled={disabled} readOnly={readOnly} defaultValue={this.state.data || value}/>
+               disabled={disabled} readOnly={readOnly} defaultValue={this.state.data}/>
       </div>
       <div className="m7-cell__ft">
         <i rel="icon"/>
