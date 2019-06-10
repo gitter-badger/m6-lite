@@ -5,6 +5,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ProcessUtils from "../component/process";
+import ValidType from "../utils/ValidType";
 
 export const { Provider, Consumer } = React.createContext({});
 
@@ -39,17 +40,18 @@ async function validateFromElement(callback) {
       rs = [rs];
     }
     for (let i = 0, l = rs.length; i < l; i++) {
-      const { type, message } = rs[i];
-      let flag = true;
-      if (typeof type === "string") {
-        // 预设的校验规则
-      } else if (typeof type === "function") {
+      const { type: dType, message } = rs[i];
+      let type, flag = true;
+      if (typeof dType === "string") {
+        type = ValidType[dType]; // 预设的校验规则
+      } else {
+        type = dType;
+      }
+      if (typeof type === "function") {
         flag = type(this.state.data, viewProxy.get(null, true));
         if (flag instanceof Promise) {
           flag = await type(this.state.data, viewProxy.get(null, true));
         }
-      } else if (type instanceof Promise) {
-        flag = await type(this.state.data, viewProxy.get(null, true));
       }
       if (typeof flag === "boolean") {
         if (!flag) {
@@ -69,7 +71,7 @@ async function validateFromElement(callback) {
 
 export default function wrapper(opts = {}) {
   // type: view element element-view
-  const { type: Type = "view", cache: Cache = true, namespace: Namespace } = opts; // 静态参数
+  const { type: Type = "view", cache: Cache = true, namespace: Namespace, className: ClassName = "m7-page" } = opts; // 静态参数
 
   /** 从全局view层获取页面数据 */
   function getExtraState() {
@@ -86,7 +88,8 @@ export default function wrapper(opts = {}) {
       componentDidMount = () => {
         typeof super.componentDidMount === "function" && super.componentDidMount();
         if (Type === "view") {
-          document.documentElement.scrollTop = this.state.lastScrollTop;
+          // document.documentElement.scrollTop = this.state.lastScrollTop;
+          document.getElementsByClassName("m7-page")[0].scrollTop = this.state.lastScrollTop;
         }
       };
 
@@ -95,7 +98,8 @@ export default function wrapper(opts = {}) {
         if (Type === "view") {
           const action = this.props.history.action;
           if (Cache && Namespace) {
-            this.state.lastScrollTop = ~~document.documentElement.scrollTop;
+            //this.state.lastScrollTop = ~~document.documentElement.scrollTop;
+            this.state.lastScrollTop = ~~(document.getElementsByClassName("m7-page")[0].scrollTop);
             if (action === "POP") {
               this.state = {}; // 移除历史栈state
             }
@@ -151,7 +155,7 @@ export default function wrapper(opts = {}) {
             viewProxy: { get: this.getStateSilence, set: this.setStateSilence, validate: this.validate }
           };
           return <Provider value={value}>
-            <div className="m7-page">{super.render()}</div>
+            <div className={ClassName}>{super.render()}</div>
           </Provider>;
         } else {
           return super.render();
