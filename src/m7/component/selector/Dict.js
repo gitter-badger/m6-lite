@@ -1,4 +1,5 @@
 /**
+ * TODO 字典翻译
  * Created by XLBerry on 2019/5/21
  */
 import React from "react";
@@ -35,15 +36,12 @@ export default class Dict extends React.PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps, prevState/*, snapshot*/) {
-    if (prevState.value !== this.state.value) {
-      const { id, onChange } = this.props;
-      typeof onChange === "function" && onChange({ id, type: "dict", data: this.state.data });
-    }
+  componentDidUpdate(/*prevProps, prevState, snapshot*/) {
+    // console.log(prevState.data, this.state.data);
   }
 
   onClick = () => {
-    const { multiple, cascade, displayRender, searchable, viewProxy, id, splitKey, dataFor } = this.props;
+    const { multiple, cascade, displayRender, searchable, viewProxy, id, splitKey, dataFor, onChange } = this.props, prevData = this.state.data;
     const setStateData = async ({ checked, checkedLabel }, reset = false) => {
       await this.setState({
         data: checked,
@@ -54,6 +52,10 @@ export default class Dict extends React.PureComponent {
       if (id) {
         viewProxy.set(id, this.state.data);
         cascade && viewProxy.set(`${id}#label`, this.state.dataLabel);
+      }
+      // 判断onChange事件
+      if (prevData.map((d) => d.code).join("") !== this.state.data.map((d) => d.code).join("")) {
+        typeof onChange === "function" && onChange({ id, type: "dict", data: this.state.data });
       }
     };
     ProcessUtils.showPicker({
