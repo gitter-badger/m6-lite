@@ -22,5 +22,6 @@ export default class Notice extends ProcessComponent {
 }
 
 Notice.defaultProps = {
+  className: "",
   type: "notice"
 };
