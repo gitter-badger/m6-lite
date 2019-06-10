@@ -14,8 +14,8 @@ export default class Button extends React.PureComponent {
   };
 
   render() {
-    const { title, type, status, children } = this.props;
-    return <a href="javascript:" className={`m7-btn m7-btn_${status} m7-btn_${type}`} onClick={this.handleClick}>
+    const { title, display, type, status, children } = this.props;
+    return <a href="javascript:" className={`m7-btn m7-btn_${display} m7-btn_${status} m7-btn_${type}`} onClick={this.handleClick}>
       {status === "loading" ? <i className="m7-loading-icon"/> : null}
       {title}
       {children}
@@ -34,6 +34,9 @@ Button.propTypes = {
   status: PropTypes.oneOf([
     "disabled",
     "loading"
+  ]),
+  display: PropTypes.oneOf([
+    "block"
   ])
 };
 
