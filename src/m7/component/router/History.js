@@ -4,4 +4,8 @@
 
 const createHistory = require("history").createHashHistory;
 
-export const history = createHistory();
+const history = createHistory();
+
+window.M7History = history;
+
+export { history };
