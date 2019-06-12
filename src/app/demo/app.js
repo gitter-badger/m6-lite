@@ -31,7 +31,7 @@ const application = {
   "js": [], // 初始写入html的js集 "./cordova.js"
   "css": [], // 初始写入html的css集
   "template": "", // 页面模板
-  "mock": true, // 添加mock模块
+  "mock": false, // 添加mock模块
   // 运行环境全局变量
   "scope": {
     "mock": true // 开发模式是否启用mock测试接口
