@@ -7,6 +7,8 @@ import "./index.less";
 
 import Re from "./component/router/Re";
 import create from "./hoc/WrapComponent";
+import * as boost from "./hoc/Boost";
+import request, { requestAsync } from "./utils/Fetch";
 
 import Button from "./component/form/Button";
 import Input from "./component/input/Input";
@@ -16,7 +18,7 @@ import ProcessUtils from "./component/process/index";
 
 export default {
   Re,
-  create,
+  create, boost, request, requestAsync,
   Button, Input, Selector,
   List,
   ...ProcessUtils,
