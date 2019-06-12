@@ -20,7 +20,7 @@ export default class Datetime extends React.PureComponent {
   static getDerivedStateFromProps(props, state) {
     if (!state.userAction) {
       const { viewProxy, id, format } = props;
-      const vData = viewProxy.get(id);
+      const vData = viewProxy.get()[id];
       if (vData instanceof Date) {
         return { ...state, data: vData, value: vData["format"](format) };
       } else {
@@ -40,16 +40,17 @@ export default class Datetime extends React.PureComponent {
   }
 
   onClick = () => {
-    const setStateData = (data, reset = false) => {
+    const setStateData = async (data, reset = false) => {
       const { viewProxy, id, format } = this.props;
       this.tmpData = data;
-      this.setState({
+      await this.setState({
         data,
         value: reset ? "" : data["format"](format),
         userAction: true
-      }, () => {
-        id && viewProxy.set(id, data);
       });
+      if (id) {
+        viewProxy.get()[id] = data;
+      }
     };
 
     let data; // 巧妙的空值获取当前最新时间

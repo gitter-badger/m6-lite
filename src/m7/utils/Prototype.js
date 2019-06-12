@@ -51,49 +51,4 @@ export default (function () {
     }
   ]);
 
-  defineProperties(Object.prototype, [
-    {
-      key: "getV",
-      value: function getV(key, obj = this) {
-        if (!key) {
-          return obj;
-        }
-        if (typeof key !== "string") throw new Error("非法key类型");
-        let keys = key.split("."), length = keys.length - 1;
-        for (let i = 0; i < length; i++) {
-          if (keys[i] !== "") {
-            obj = obj[keys[i]];
-          }
-          if (typeof obj !== "object") {
-            break;
-          }
-        }
-        return typeof obj !== "object" ? null : obj[keys[length]];
-      }
-    },
-    {
-      key: "setV",
-      value: function setV(key, value, obj = this) {
-        if (typeof key === "object") {
-          obj = key;
-          return obj;
-        }
-        if (typeof key !== "string") throw new Error("非法key类型");
-        let keys = key.split("."), length = keys.length - 1;
-        for (let i = 0; i < length; i++) {
-          if (keys[i] !== "") {
-            if (typeof obj[keys[i]] === "object" && !Array.isArray(obj[keys[i]])) {
-              // 保留
-            } else {
-              obj[keys[i]] = {};
-            }
-            obj = obj[keys[i]];
-          }
-        }
-        obj[keys[length]] = value;
-        return obj;
-      }
-    }
-  ]);
-
 })();

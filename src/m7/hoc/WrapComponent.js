@@ -48,9 +48,9 @@ async function validateFromElement(callback) {
         type = dType;
       }
       if (typeof type === "function") {
-        flag = type(this.state.data, viewProxy.get(null, true));
+        flag = type(this.state.data, viewProxy.get());
         if (flag instanceof Promise) {
-          flag = await type(this.state.data, viewProxy.get(null, true));
+          flag = await type(this.state.data, viewProxy.get());
         }
       }
       if (typeof flag === "boolean") {
@@ -132,18 +132,7 @@ export default function wrapper(opts = {}) {
         });
       };
 
-      setStateSilence = (key, value) => {
-        this.state["setV"](key, value);
-      };
-
-      getStateSilence = (key, total = false) => {
-        if (key) return this.state["getV"](key);
-        else {
-          if (total)
-            return this.state;
-          else return null;
-        }
-      };
+      getState = () => this.state;
 
       validate = Type === "view" ? validateFromView.bind(this) : validateFromElement.bind(this);
 
@@ -152,7 +141,7 @@ export default function wrapper(opts = {}) {
       render = () => {
         if (Type === "view") {
           const value = {
-            viewProxy: { get: this.getStateSilence, set: this.setStateSilence, validate: this.validate }
+            viewProxy: { get: this.getState, set: this.setState, validate: this.validate }
           };
           return <Provider value={value}>
             <div className={ClassName}>{super.render()}</div>

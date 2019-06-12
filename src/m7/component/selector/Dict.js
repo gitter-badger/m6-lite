@@ -23,9 +23,9 @@ export default class Dict extends React.PureComponent {
   static getDerivedStateFromProps(props, state) {
     if (!state.userAction) {
       const { viewProxy, id, displayRender, splitKey } = props;
-      const vData = viewProxy.get(id);
+      const vData = viewProxy.get()[id];
       if (Array.isArray(vData)) {
-        const newState = { ...state, data: vData, dataLabel: viewProxy.get(`${id}#label`) || [] };
+        const newState = { ...state, data: vData, dataLabel: viewProxy.get()[`${id}#label`] || [] };
         newState.value = vData.map((v, i) => displayRender({ value: v, label: newState.dataLabel[i] })).join(splitKey);
         return newState;
       } else {
@@ -50,8 +50,10 @@ export default class Dict extends React.PureComponent {
         userAction: true
       });
       if (id) {
-        viewProxy.set(id, this.state.data);
-        cascade && viewProxy.set(`${id}#label`, this.state.dataLabel);
+        viewProxy.get()[id] = this.state.data;
+        if (cascade) {
+          viewProxy.get()[`${id}#label`] = this.state.dataLabel;
+        }
       }
       // 判断onChange事件
       if (prevData.map((d) => d.code).join("") !== this.state.data.map((d) => d.code).join("")) {

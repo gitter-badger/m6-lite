@@ -19,8 +19,7 @@ export default class List extends React.PureComponent {
     if (subclass) {
       return { ...state, data };
     } else if (id && !state.userAction) {
-      const vData = viewProxy.get(id);
-      return { ...state, data: vData };
+      return { ...state, data: viewProxy.get()[id] };
     } else {
       return { ...state, userAction: false };
     }

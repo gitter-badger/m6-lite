@@ -11,7 +11,7 @@ import create from "../../hoc/WrapComponent";
 export default class Input extends React.Component {
 
   state = {
-    data: this.props.viewProxy.get(this.props.id) || this.props.value,
+    data: this.props.viewProxy.get()[this.props.id] || this.props.value,
     userAction: false // 交互变更，事件消耗
   };
 
@@ -20,12 +20,12 @@ export default class Input extends React.Component {
     if (subclass) {
       return { ...state, data: value };
     } else {
-      const vData = viewProxy.get(id), { data, userAction } = state;
+      const vData = viewProxy.get(), { data, userAction } = state;
       if (userAction) {
-        viewProxy.set(id, data); // 告知页面数据，交互变更当前数据
+        vData[id] = data; // 告知页面交互变更当前数据
         return { data, userAction: false }; // 交互变更，比如手动输入
-      } else if (vData !== data) {
-        return { data: vData }; // 页面数据行为
+      } else if (vData[id] !== data) {
+        return { data: vData[id] }; // 页面数据行为
       } else {
         return null;
       }
