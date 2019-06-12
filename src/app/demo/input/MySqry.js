@@ -27,22 +27,24 @@ export default class MySqry extends React.Component {
   };
 
   renderSqrys = () => {
+    let trueCount = 0; // 真实个数下标
     return <div>
       <div style={{ display: `${this.props.data.length > 0 ? "block" : "none"}` }}>
         {
           (this.props.data || []).map((sqry, i) => {
             if (sqry) {
+              trueCount += 1;
               return <div key={i}>
-                <div className="m7-cells__title">随迁人员信息[{i+1}]</div>
+                <div className="m7-cells__title demo-cells__title">
+                  <span className="demo-cells__title__hd">随迁人员信息[{trueCount}]</span>
+                  <span className="demo-cells__title__fnc" style={{ color: "red" }} data-index={i} onClick={this.handleDel}>删除</span>
+                </div>
                 <div className="m7-cells">
                   <M7.Input id={`${i}-xm`} title="姓名" placeholder="请输入姓名" onChange={this.handleChange} value={sqry.xm}
                             rules={[{ type: "required", message: "请输入姓名" }, { type: "cnName", message: "请输入正确姓名" }]}/>
                   <M7.Input id={`${i}-gmsfhm`} title="公民身份号码" placeholder="请输入公民身份号码" onChange={this.handleChange} value={sqry.gmsfhm}
                             rules={[{ type: "required", message: "请输入公民身份号码" }]}/>
                   <M7.Selector id={`${i}-yzqrgx`} type="dict" title="与主迁入关系" placeholder="请选择与主迁入关系" onChange={this.handleChange}/>
-                  <div className="m7-cell">
-                    <div style={{ flex: 1, textAlign: "center", color: "red" }} data-index={i} onClick={this.handleDel}>删除</div>
-                  </div>
                 </div>
               </div>;
             } else {

@@ -11,6 +11,11 @@ const devServer = {
       "target": "http://192.168.10.183:8103", // 接口的域名
       "pathRewrite": {"^/api": ""}, // 如果接口本身没有/api需要通过pathRewrite来重写了地址
       "changeOrigin": true, // 如果接口跨域，需要进行这个参数配置
+    },
+    "/weather_mini": {
+      "target": "http://wthrcdn.etouch.cn",
+      "pathRewrite": {"^/weather_mini": "/weather_mini"},
+      "changeOrigin": true,
     }
   }
 };
@@ -26,6 +31,7 @@ const application = {
   "js": [], // 初始写入html的js集 "./cordova.js"
   "css": [], // 初始写入html的css集
   "template": "", // 页面模板
+  "mock": true, // 添加mock模块
   // 运行环境全局变量
   "scope": {
     "mock": true // 开发模式是否启用mock测试接口
