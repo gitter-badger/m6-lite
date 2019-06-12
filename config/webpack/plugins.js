@@ -11,7 +11,7 @@ const { outputJS, outputCss } = require("./output").get();
 function getHtmlPages() {
   const { mode, debug } = toolKit.getEnv();
   return toolKit.searchApp().map(({ application }) => {
-    const { id, title, favicon, version, js = [], css = [], template, scope } = application;
+    const { id, title, favicon, version, js = [], css = [], template, mock, scope } = application;
     let asyncJS = [`${outputJS}exif-js.js`], denpOnCSS = [];
 
     if (mode === "dev") {
@@ -21,12 +21,18 @@ function getHtmlPages() {
       }
       denpOnCSS.push(`./${outputCss}${id}-runtime.css?v=${version}`);
     } else if (mode === "build") {
+      if (mock) {
+        asyncJS.push(`${outputJS}mock-min.js?v=${version}`);
+      }
       asyncJS.push(`${outputJS}${id}.js?v=${version}`);
       denpOnCSS = denpOnCSS.concat([
         `./${outputCss}m7.css?v=${version}`,
         `./${outputCss}${id}-runtime.css?v=${version}`
       ]);
     } else if (mode === "release") {
+      if (mock) {
+        asyncJS.push(`${outputJS}mock-min.js?v=${version}`);
+      }
       asyncJS = asyncJS.concat([
         `${outputJS}react.production.min.js?v=${version}`,
         `${outputJS}react-dom.production.min.js?v=${version}`,

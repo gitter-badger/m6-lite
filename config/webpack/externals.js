@@ -8,12 +8,14 @@ function get() {
   if (mode === "build") {
     Object.assign(externals, {
       "react": "React",
-      "react-dom": "ReactDOM"
+      "react-dom": "ReactDOM",
+      "mockjs": "Mock",
     });
   } else if (mode === "release") {
     Object.assign(externals, {
       "react": "React",
       "react-dom": "ReactDOM",
+      "mockjs": "Mock",
       "m7": "m7.default"
     });
   } else if (mode === "libBuild") {
