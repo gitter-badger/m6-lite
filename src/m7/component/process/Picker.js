@@ -46,24 +46,24 @@ export default class Picker extends ProcessComponent {
 
   render() {
     const { show, content, contentCls, cancelText = "取消", confirmText = "确定" } = this.state;
-    let rDisplay, maskCls, pickerCls;
+    let display, maskCls, pickerCls;
     if (show === 0) {
-      rDisplay = "none";
+      display = "none";
       maskCls = "m7-animate-fade-out";
       pickerCls = "m7-animate-slide-down";
     } else if (typeof show === "boolean") {
       if (show) {
-        rDisplay = "block";
+        display = "block";
         maskCls = "m7-animate-fade-in";
         pickerCls = "m7-animate-slide-up";
       } else {
-        rDisplay = "block";
+        display = "block";
         maskCls = "m7-animate-fade-out";
         pickerCls = "m7-animate-slide-down";
       }
     }
 
-    return <div style={{ display: rDisplay }}>
+    return <div style={{ display }}>
       <div data-action="miss" className={`m7-mask ${maskCls}`} onClick={this.handleClick}/>
       <div className={`m7-picker ${pickerCls}`}>
         <div className="m7-picker__hd">
