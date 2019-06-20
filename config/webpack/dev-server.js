@@ -8,7 +8,8 @@ const FS = require("fs");
 const staticSrc = [
   "/image/favicon.ico",
   "/js/m7-boot.min.js",
-  "/js/exif-js.js",
+  "/js/exif-js.js", // 图片信息（旋转信息）
+  "/js/hammer.min.js", // 触摸手势库
 ];
 const compileSrc = [
   "/css/m7.css",
