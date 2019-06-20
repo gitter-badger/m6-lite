@@ -12,8 +12,10 @@ export default class MyButton extends React.Component {
       <Header title="Button" desc="按钮" onBack={this.goBack}/>
       <div style={{padding: "15px"}}>
         <M7.Button title="页面主操作" type="primary"/>
-        <M7.Button title="页面主操作" type="primary" status="loading"/>
-        <M7.Button title="页面主操作" type="primary" status="disabled"/>
+        <div className="m7-btns">
+          <M7.Button title="页面主操作" type="primary" status="loading"/>
+          <M7.Button title="页面主操作" type="primary" status="disabled"/>
+        </div>
         <M7.Button title="页面次要操作" type="default"/>
         <M7.Button title="页面次要操作" type="default" status="loading"/>
         <M7.Button title="页面次要操作" type="default" status="disabled"/>
@@ -21,9 +23,9 @@ export default class MyButton extends React.Component {
         <M7.Button title="警告类操作" type="warn" status="loading"/>
         <M7.Button title="警告类操作" type="warn" status="disabled"/>
 
-        <M7.Button title="页面主操作" type="primary" display="block"/>
-        <M7.Button title="页面次要操作" type="default" display="block" status="loading"/>
-        <M7.Button title="警告类操作" type="warn" display="block" status="disabled"/>
+        <M7.Button title="页面主操作" type="primary" style={{ width: "auto" }}/>
+        <M7.Button title="页面次要操作" type="default" style={{ width: "auto" }} status="loading"/>
+        <M7.Button title="警告类操作" type="warn" style={{ width: "auto" }} status="disabled"/>
       </div>
     </div>;
   }

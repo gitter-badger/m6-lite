@@ -24,7 +24,7 @@ export default class MyDict extends React.Component {
         <M7.Selector id="dict2" type="dict" title="多选" placeholder="请选择字典2" searchable multiple dataFor={DataFor} onChange={this.handleChange}/>
         <M7.Selector id="dict3" type="dict" title="多标签单选" placeholder="请选择字典3" cascade dataFor={DataForCascade} onChange={this.handleChange}/>
         <M7.Selector id="dict4" type="dict" title="多标签多选" placeholder="请选择字典4" cascade multiple dataFor={DataForCascade} onChange={this.handleChange}
-                     displayRender={({ value, label }) => label.map((d) => d.detail).join("") + value.detail}/>
+                     valueRender={({ value, label }) => label.map((d) => d.detail).join("") + value.detail}/>
       </div>
       <div className="m7-cells__title">页面数据</div>
       <div className="m7-cells">

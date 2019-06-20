@@ -16,6 +16,11 @@ const devServer = {
       "target": "http://wthrcdn.etouch.cn",
       "pathRewrite": {"^/weather_mini": "/weather_mini"},
       "changeOrigin": true,
+    },
+    "/hz": {
+      "target": "http://v5kqe2.natappfree.cc",
+      "pathRewrite": {"^/hz": "/hz"},
+      "changeOrigin": true,
     }
   }
 };

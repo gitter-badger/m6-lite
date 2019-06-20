@@ -1,4 +1,33 @@
-.page-section-category {
+.demo-area {
+  padding: 0 15px;
+
+  ul {
+    list-style: none;
+  }
+}
+
+.demo-section {
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.demo-section--show {
+  .page-section-category {
+    opacity: .4;
+  }
+
+  .demo-category-item {
+    height: auto;
+
+    .demo-category-item__bd {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.demo-category {
   display: flex;
   padding: 20px;
   align-items: center;
@@ -8,73 +37,58 @@
   cursor: pointer;
   transition: .3s;
 
-  .page-section-category-title {
+  &__title {
     flex: 1;
     pointer-events: none;
   }
 
-  .page-section-category-icon {
+  &__icon {
     width: 30px;
     height: 30px;
     pointer-events: none;
   }
 }
 
-.page-section-category-inner {
+.demo-category-item {
   height: 0;
   overflow: hidden;
 
-  .page-section-category-inner-content {
+  &__bd {
     position: relative;
     overflow: hidden;
     opacity: 0;
     transform: translateY(-50%);
     transition: .3s;
-  }
 
-  .page-section-category-inner-a {
-    padding: 10px 20px;
-    position: relative;
-    display: flex;
-    align-items: center;
+    &__i {
+      padding: 10px 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
 
-    p {
-      flex: 1;
-    }
-
-    &:before {
-      content: " ";
-      position: absolute;
-      z-index: 2;
-      left: 15px;
-      top: 0;
-      right: 0;
-      height: 1px;
-      border-top: 1px solid #e5e5e5;
-      color: #e5e5e5;
-      transform-origin: 0 0;
-      transform: scaleY(0.5);
-    }
-
-    &:first-child {
-      &:before {
-        display: none;
+      p {
+        flex: 1;
       }
-    }
-  }
-}
 
-.page-section-category-inner-show {
-  .page-section-category {
-    opacity: .4;
-  }
+      &:before {
+        content: " ";
+        position: absolute;
+        z-index: 2;
+        left: 15px;
+        top: 0;
+        right: 0;
+        height: 1px;
+        border-top: 1px solid #e5e5e5;
+        color: #e5e5e5;
+        transform-origin: 0 0;
+        transform: scaleY(0.5);
+      }
 
-  .page-section-category-inner {
-    height: auto;
-
-    .page-section-category-inner-content {
-      opacity: 1;
-      transform: translateY(0);
+      &:first-child {
+        &:before {
+          display: none;
+        }
+      }
     }
   }
 }
