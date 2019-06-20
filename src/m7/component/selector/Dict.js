@@ -22,11 +22,11 @@ export default class Dict extends React.PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     if (!state.userAction) {
-      const { viewProxy, id, displayRender, splitKey } = props;
+      const { viewProxy, id, valueRender, splitKey } = props;
       const vData = viewProxy.get()[id];
       if (Array.isArray(vData)) {
         const newState = { ...state, data: vData, dataLabel: viewProxy.get()[`${id}#label`] || [] };
-        newState.value = vData.map((v, i) => displayRender({ value: v, label: newState.dataLabel[i] })).join(splitKey);
+        newState.value = vData.map((v, i) => valueRender({ value: v, label: newState.dataLabel[i] })).join(splitKey);
         return newState;
       } else {
         return { ...state, data: [], dataLabel: [], value: "" }; // 置空
@@ -41,12 +41,12 @@ export default class Dict extends React.PureComponent {
   }
 
   onClick = () => {
-    const { multiple, cascade, displayRender, searchable, viewProxy, id, splitKey, dataFor, onChange } = this.props, prevData = this.state.data;
+    const { multiple, cascade, valueRender, searchable, viewProxy, id, splitKey, dataFor, onChange } = this.props, prevData = this.state.data;
     const setStateData = async ({ checked, checkedLabel }, reset = false) => {
       await this.setState({
         data: checked,
         dataLabel: checkedLabel,
-        value: reset ? "" : checked.map((v, i) => displayRender({ value: v, label: checkedLabel[i] })).join(splitKey),
+        value: reset ? "" : checked.map((v, i) => valueRender({ value: v, label: checkedLabel[i] })).join(splitKey),
         userAction: true
       });
       if (id) {
@@ -87,7 +87,7 @@ Dict.defaultProps = {
   ...Dict.defaultProps,
   multiple: false,
   cascade: false,
-  displayRender: ({ value/*, label*/ }) => value.detail,
+  valueRender: ({ value/*, label*/ }) => value.detail,
   splitKey: "，",
   searchable: false,
   dataFor: {},
@@ -99,7 +99,7 @@ Dict.propTypes = {
   multiple: PropTypes.bool,
   cascade: PropTypes.bool, // 级联模式
   splitKey: PropTypes.string, // 字典detail切割符
-  displayRender: PropTypes.func, // 显示文字函数处理
+  valueRender: PropTypes.func, // 显示文字函数处理
   searchable: PropTypes.bool, // 搜索条
   onChange: PropTypes.func,
   dataFor: PropTypes.object, // 数据来源对象
