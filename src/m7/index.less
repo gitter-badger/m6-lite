@@ -1,4 +1,5 @@
 @colorPrimary: #07C160;
+@colorAlert: #ffbe00;
 @colorWarn: #FA5151;
 @textColorTitle: rgba(0, 0, 0, 0.9);
 @textColorDesc: rgba(0, 0, 0, 0.5);
@@ -6,6 +7,7 @@
 @lineColorLight: rgba(0, 0, 0, 0.1);
 
 @bgColorDefault: #ededed;
+@bgColorContent: #ffffff;
 
 @cellLineHeight: 1.41176471;
 @cellFontSize: 17px;
@@ -42,9 +44,14 @@
 @btnDefaultActiveBg: #D9D9D9;
 //---
 @btnWarnBg: #F2F2F2;
-@btnWarnFontColor: #FA5151;
-@btnWarnActiveFontColor: #FA5151;
+@btnWarnFontColor: @colorWarn;
+@btnWarnActiveFontColor: @colorWarn;
 @btnWarnActiveBg: #D9D9D9;
+
+@uploaderSpacing: 9px;
+@uploaderSize: 79px;
+@uploaderBorderWidth: 1px;
+@uploaderBorderColor: #d9d9d9;
 
 @import "./css/fn";
 @import "./css/reset";
@@ -60,3 +67,4 @@
 @import "./component/input/input";
 @import "./component/list/list";
 @import "./component/selector/selector";
+@import "./component/uploader/uploader";

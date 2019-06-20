@@ -2,6 +2,8 @@
  * Created by XLBerry on 2019/5/5
  */
 
+require("./Image"); // 扩展Image对象，添加压缩静态方法
+
 export default (function () {
   "use strict";
 
@@ -20,6 +22,42 @@ export default (function () {
       key: "replaceAll",
       value: function replaceAll(findText, repText) {
         return this.replace(new RegExp(findText, "g"), repText);
+      }
+    },
+    {
+      key: "urlValid",
+      /**
+       * 判断链接有效性
+       * @param timeout 超时时间
+       * @param fileType 文件类型，例如：image/jpeg, image/png
+       * @param resType 返回类型，例如：string, blob
+       * @return {Promise<boolean>}
+       */
+      value: function urlValid({ timeout = 2000, fileType, resType = "blob" }) {
+        return new Promise((resolve) => {
+          if (!this) {
+            resolve(false);
+          }
+          let xmlHttp = new XMLHttpRequest();
+          xmlHttp.timeout = timeout; // 超时时间判定
+
+          function stateChange() {
+            if (xmlHttp.readyState === 4) {
+              if (xmlHttp.status === 200) {
+                xmlHttp = null;
+                resolve(fileType ? new Blob([xmlHttp.response], { type: fileType }) : true);
+              } else {
+                xmlHttp = null;
+                resolve(false);
+              }
+            }
+          }
+
+          xmlHttp.onreadystatechange = stateChange;
+          xmlHttp.open("Get", this, true);
+          xmlHttp.responseType = resType;
+          xmlHttp.send(null);
+        });
       }
     }
   ]);
