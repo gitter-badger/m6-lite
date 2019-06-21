@@ -35,7 +35,7 @@ export default class Datetime extends React.PureComponent {
   componentDidUpdate(prevProps, prevState/*, snapshot*/) {
     if (prevState.data !== this.state.data) {
       const { id, onChange } = this.props;
-      typeof onChange === "function" && onChange({ id, type: "datetime", data: this.state.data });
+      typeof onChange == "function" && onChange({ id, type: "datetime", data: this.state.data });
     }
   }
 

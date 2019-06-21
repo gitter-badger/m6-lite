@@ -145,7 +145,7 @@ export default class DictView extends React.Component {
   render() {
     const { cascade, searchable, dataFor: { onReLoad, onLoad } } = this.props;
     const listCls = `m7-dict__bd__list ${cascade ? "label" : ""} ${searchable ? "search" : ""}`;
-    const canDown = typeof onReLoad === "function", canUp = this.canUp && typeof onLoad === "function";
+    const canDown = typeof onReLoad == "function", canUp = this.canUp && typeof onLoad == "function";
     return <div>
       {cascade ? <div className="m7-dict__label" onClick={this.handleLabelClick}>
         {this.state.currentLabel.map(({ code, detail, ...others }) => <label key={code} data-more={JSON.stringify({

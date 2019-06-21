@@ -57,7 +57,7 @@ export default class Dict extends React.PureComponent {
       }
       // 判断onChange事件
       if (prevData.map((d) => d.code).join("") !== this.state.data.map((d) => d.code).join("")) {
-        typeof onChange === "function" && onChange({ id, type: "dict", data: this.state.data });
+        typeof onChange == "function" && onChange({ id, type: "dict", data: this.state.data });
       }
     };
     ProcessUtils.showPicker({

@@ -98,7 +98,7 @@ export default class DatetimeView extends React.Component {
     }
     let result = {};
     Object.keys(this.state).forEach((type) => result[type] = this.state[type].value);
-    typeof this.props.onChange === "function" && this.props.onChange(result);
+    typeof this.props.onChange == "function" && this.props.onChange(result);
   };
 
   render() {

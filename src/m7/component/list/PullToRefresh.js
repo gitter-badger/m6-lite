@@ -153,9 +153,7 @@ pullToRefresh.prototype.touchEnd = async function () {
       const loadFunc = this.touchData.canDown ? onReLoad : onLoad;
       const loadEle = this.touchData.canDown ? downLoadDOM : upLoadDOM;
       const diffDist = this.touchData.canDown ? distThreshold : -distThreshold;
-      if (loadFunc instanceof Promise) {
-        await this.wait2Promise(loadFunc, diffDist, loadEle);
-      } else if (typeof loadFunc === "function") {
+      if (typeof loadFunc == "function") {
         let rs = loadFunc();
         if (rs instanceof Promise) {
           await this.wait2Promise(rs, diffDist, loadEle);

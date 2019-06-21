@@ -4,7 +4,7 @@
  */
 
 function ScaleElement(props) {
-  if (typeof props.element !== "function") throw "element对象应为函数";
+  if (typeof props.element != "function") throw "element对象应为函数";
   this.props = props; // 函数配置
   this.lock = false; // 标记锁，用于缩放移动控制
   this.initVariable(); // 初始化过程对象

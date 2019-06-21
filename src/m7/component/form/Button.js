@@ -10,7 +10,7 @@ export default class Button extends React.PureComponent {
   handleClick = (e) => {
     const { status, onClick } = this.props;
     if (status === "loading" || status === "disabled") return false;
-    else return typeof onClick === "function" && onClick(e);
+    else return typeof onClick == "function" && onClick(e);
   };
 
   render() {

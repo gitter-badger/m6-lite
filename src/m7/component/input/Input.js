@@ -47,7 +47,7 @@ export default class Input extends React.Component {
   componentDidUpdate(/*prevProps, prevState, snapshot*/) {
     const { id, onChange } = this.props, data = this.state.data;
     this.getRef("input").value = data || ""; // 来自外部设置value
-    typeof onChange === "function" && onChange({ id, type: "input", data });
+    typeof onChange == "function" && onChange({ id, type: "input", data });
   }
 
   /** 校验回调 */
@@ -65,15 +65,15 @@ export default class Input extends React.Component {
     }
   };
 
-  onClick = (e) => typeof this.props.onClick === "function" && this.props.onClick(e);
+  onClick = (e) => typeof this.props.onClick == "function" && this.props.onClick(e);
 
-  onFocus = (e) => typeof this.props.onFocus === "function" && this.props.onFocus(e);
+  onFocus = (e) => typeof this.props.onFocus == "function" && this.props.onFocus(e);
 
   onBlur = (e) => {
     const { id, onChange } = this.props, value = e.target.value;
     if ((this.state.data || "") !== value) {
       this.setState({ data: value, userAction: true }, () => {
-        typeof onChange === "function" && onChange({ id, type: "input", data: value });
+        typeof onChange == "function" && onChange({ id, type: "input", data: value });
       });
     }
   };

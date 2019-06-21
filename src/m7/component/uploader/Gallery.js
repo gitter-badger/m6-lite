@@ -42,7 +42,7 @@ export default class Gallery extends React.PureComponent {
     e.stopPropagation();
     this.setState({ hidden: true });
     this.handleDisplay(true);
-    typeof this.props.onHide === "function" && this.props.onHide();
+    typeof this.props.onHide == "function" && this.props.onHide();
     return false;
   };
 

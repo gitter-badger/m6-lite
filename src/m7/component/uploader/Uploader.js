@@ -30,8 +30,8 @@ export default class Uploader extends React.Component {
   /** 触发上传逻辑 */
   handleUpload = (item) => {
     const { upload, beforeUpload, afterUpload } = this.props;
-    if (typeof upload === "function") {
-      typeof beforeUpload === "function" && new Promise((resolve) => resolve()).then(() => beforeUpload(item)); // 开启微任务，避免render过程执行
+    if (typeof upload == "function") {
+      typeof beforeUpload == "function" && new Promise((resolve) => resolve()).then(() => beforeUpload(item)); // 开启微任务，避免render过程执行
       upload({
         data: item,
         success: data => {
@@ -54,7 +54,7 @@ export default class Uploader extends React.Component {
   /** 触发下载逻辑 */
   handleDownload = (item, callback) => {
     const { download, beforeDownload, afterDownload } = this.props, compressed = item.compressed;
-    if (typeof download === "function") {
+    if (typeof download == "function") {
       typeof beforeDownload == "function" && new Promise((resolve) => resolve()).then(() => beforeDownload(item)); // 开启微任务，避免render过程执行
       if (!compressed) {
         ProcessUtils.showLoading({
@@ -62,8 +62,8 @@ export default class Uploader extends React.Component {
         });
       }
       const handleAfterDownload = () => {
-        typeof afterDownload === "function" && afterDownload(item);
-        typeof callback === "function" && callback(item);
+        typeof afterDownload == "function" && afterDownload(item);
+        typeof callback == "function" && callback(item);
       };
       download({
         data: item,
@@ -123,7 +123,7 @@ export default class Uploader extends React.Component {
     await this.setState({ userAction: true });
     const { viewProxy, id } = this.props;
     viewProxy.get()[id] = this.state.data;
-    typeof callback === "function" && callback(item);
+    typeof callback == "function" && callback(item);
   });
 
   /** 单个文件点击触发 */

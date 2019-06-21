@@ -47,7 +47,7 @@ async function validateFromElement(callback) {
       } else {
         type = dType;
       }
-      if (typeof type === "function") {
+      if (typeof type == "function") {
         flag = type(this.state.data, viewProxy.get());
         if (flag instanceof Promise) {
           flag = await type(this.state.data, viewProxy.get());
@@ -64,7 +64,7 @@ async function validateFromElement(callback) {
       }
     }
   }
-  typeof this.onValidate === "function" && this.onValidate(result);
+  typeof this.onValidate == "function" && this.onValidate(result);
   callback(result);
   return result;
 }
@@ -86,7 +86,7 @@ export default function wrapper(opts = {}) {
       state = { ...this["state"], ...getExtraState() };
 
       componentDidMount = () => {
-        typeof super.componentDidMount === "function" && super.componentDidMount();
+        typeof super.componentDidMount == "function" && super.componentDidMount();
         if (Type === "view") {
           // document.documentElement.scrollTop = this.state.lastScrollTop;
           document.getElementsByClassName("m7-page")[0].scrollTop = this.state.lastScrollTop;
@@ -106,7 +106,7 @@ export default function wrapper(opts = {}) {
             GlobalState[Namespace] = this.state; // 当前state备份至调度
           }
         }
-        typeof super.componentWillUnmount === "function" && super.componentWillUnmount();
+        typeof super.componentWillUnmount == "function" && super.componentWillUnmount();
       };
 
       setRef = (name) => {
@@ -126,7 +126,7 @@ export default function wrapper(opts = {}) {
       setState = (state = {}, callback) => {
         return new Promise((resolve) => {
           super.setState(Object.assign(this.state, state), () => {
-            typeof callback === "function" && callback(this.state);
+            typeof callback == "function" && callback(this.state);
             resolve(this.state);
           });
         });

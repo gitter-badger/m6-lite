@@ -14,7 +14,7 @@ export default class Search extends React.Component {
   componentDidUpdate(prevProps, prevState/*, snapshot*/) {
     if (prevState.data !== this.state.data) {
       const { id, onChange } = this.props;
-      typeof onChange === "function" && onChange({ id, type: "search", data: this.state.data });
+      typeof onChange == "function" && onChange({ id, type: "search", data: this.state.data });
     }
   }
 

@@ -18,7 +18,7 @@ export default class TransformTouch {
 
   constructor({ target, callback }) {
     this.target = target;
-    this.callback = typeof callback === "function" ? callback : () => {};
+    this.callback = typeof callback == "function" ? callback : () => {};
     this.target.addEventListener("touchstart", this.touchStart, false);
     this.target.addEventListener("touchmove", this.touchMove, false);
     this.target.addEventListener("touchend", this.touchEnd, false);
