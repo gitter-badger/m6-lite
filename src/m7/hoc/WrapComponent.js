@@ -34,7 +34,7 @@ function validateFromView() {
 async function validateFromElement(callback) {
   const { rules, viewProxy } = this.props;
   let result = null;
-  if (typeof rules === "object") {
+  if (typeof rules == "object") {
     let rs = rules;
     if (!Array.isArray(rs)) {
       rs = [rs];
@@ -42,7 +42,7 @@ async function validateFromElement(callback) {
     for (let i = 0, l = rs.length; i < l; i++) {
       const { type: dType, message } = rs[i];
       let type, flag = true;
-      if (typeof dType === "string") {
+      if (typeof dType == "string") {
         type = ValidType[dType]; // 预设的校验规则
       } else {
         type = dType;
@@ -53,12 +53,12 @@ async function validateFromElement(callback) {
           flag = await type(this.state.data, viewProxy.get());
         }
       }
-      if (typeof flag === "boolean") {
+      if (typeof flag == "boolean") {
         if (!flag) {
           result = message;
           break;
         }
-      } else if (typeof flag === "string") {
+      } else if (typeof flag == "string") {
         result = flag;
         break;
       }
@@ -110,7 +110,7 @@ export default function wrapper(opts = {}) {
       };
 
       setRef = (name) => {
-        if (typeof this.m7Refs !== "object") {
+        if (typeof this.m7Refs != "object") {
           this.m7Refs = {};
         }
         if (typeof name == "string" && !this.m7Refs[name]) {

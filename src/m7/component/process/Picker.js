@@ -51,7 +51,7 @@ export default class Picker extends ProcessComponent {
       display = "none";
       maskCls = "m7-animate-fade-out";
       pickerCls = "m7-animate-slide-down";
-    } else if (typeof show === "boolean") {
+    } else if (typeof show == "boolean") {
       if (show) {
         display = "block";
         maskCls = "m7-animate-fade-in";

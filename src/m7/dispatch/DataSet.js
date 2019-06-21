@@ -6,14 +6,14 @@
 const DSK = Symbol("DataSetKey");
 
 export default function DataSet(data = {}) {
-  if (typeof data !== "object") {
+  if (typeof data != "object") {
     throw new Error("初始化DataSet参数非object类型");
   }
   this[DSK] = JSON.parse(JSON.stringify(data));
 }
 
 function checkKey(key) {
-  if (typeof key !== "string") {
+  if (typeof key != "string") {
     throw new Error("设置DataSet的key非string类型");
   }
 }
@@ -29,14 +29,14 @@ DataSet.prototype = {
       if (keys[i] !== "") {
         pData = pData[keys[i]];
       }
-      if (typeof pData !== "object") {
+      if (typeof pData != "object") {
         break;
       }
     }
-    return typeof pData !== "object" ? null : pData[keys[length]];
+    return typeof pData != "object" ? null : pData[keys[length]];
   },
   set: function set(key, value) {
-    if (typeof key === "object") {
+    if (typeof key == "object") {
       this[DSK] = key;
       return this;
     }
@@ -44,7 +44,7 @@ DataSet.prototype = {
     let keys = key.split("."), length = keys.length - 1, pData = this[DSK];
     for (let i = 0; i < length; i++) {
       if (keys[i] !== "") {
-        if (typeof pData[keys[i]] === "object" && !Array.isArray(pData[keys[i]])) {
+        if (typeof pData[keys[i]] == "object" && !Array.isArray(pData[keys[i]])) {
           // 保留
         } else {
           pData[keys[i]] = {};

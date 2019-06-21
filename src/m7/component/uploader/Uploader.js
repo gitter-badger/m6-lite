@@ -234,7 +234,7 @@ export default class Uploader extends React.Component {
   /** 删除预览图片，事件冒泡会穿透到执行隐藏Gallery */
   handleDelete = (e) => {
     let fileId = null, delIndex = -1;
-    if (typeof e === "string") {
+    if (typeof e == "string") {
       fileId = e;
     } else {
       fileId = this.state.gallery.id;

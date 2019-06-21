@@ -15,7 +15,7 @@ export default class Broadcast {
   static publish({ channel, args, range = [] }) {
     let subscriber = window.M7SCOPE.subscriber = window.M7SCOPE.subscriber || {};
     subscriber[channel] = subscriber[channel] || {};
-    if (typeof range === "string") {
+    if (typeof range == "string") {
       range = [range];
     }
     if (range.length > 0) {

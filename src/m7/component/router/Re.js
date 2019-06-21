@@ -15,7 +15,7 @@ export default class Re extends React.PureComponent {
 
   getChildren(children) {
     return React.Children.map(children, (child, i) => {
-      if (typeof child == "object" && child["$$typeof"].toString() === "Symbol(react.element)") {
+      if (typeof child == "object" && child["$$typeof"].toString() == "Symbol(react.element)") {
         if (child.props.path) {
           return React["cloneElement"](child, {
             key: i,
