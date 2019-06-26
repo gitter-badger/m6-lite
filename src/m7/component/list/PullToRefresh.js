@@ -186,7 +186,7 @@ pullToRefresh.prototype.wait2Promise = async function (promise, diffDist, loadEl
   setTransform(this.props.target, "0px", `${diffDist}px`);
 
   let loadingIcon = document.createElement("i");
-  loadingIcon.setAttribute("class", "m7-loading-icon");
+  loadingIcon.setAttribute("class", "m7-icon-loading");
   if (this.touchData.canDown) {
     loadEle.insertBefore(loadingIcon, loadEle.firstChild);
   } else {
@@ -203,7 +203,7 @@ pullToRefresh.prototype.toLoad = function (loading = true) {
     this.touchData.loading = true;
     downLoadDOMText.innerText = LoadTexts.loading;
     this.toLoad.loadingIcon = document.createElement("i");
-    this.toLoad.loadingIcon.setAttribute("class", "m7-loading-icon");
+    this.toLoad.loadingIcon.setAttribute("class", "m7-icon-loading");
     downLoadDOM.insertBefore(this.toLoad.loadingIcon, downLoadDOM.firstChild);
     setTransform(target, "0px", `${distThreshold}px`);
     target.style.minHeight = `${downLoadDOM.clientHeight}px`;
