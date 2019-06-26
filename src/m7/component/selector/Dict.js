@@ -77,9 +77,9 @@ export default class Dict extends React.PureComponent {
   };
 
   render() {
-    const { id, title, placeholder, rules } = this.props;
+    const { id, title, placeholder, rules } = this.props, dataset = this.getDatasetProps();
     return <Input id={id} title={title} placeholder={placeholder} value={this.state.value} rules={rules}
-                  onClick={this.onClick} readOnly subclass ft={<i className="m7-datetime__ft"/>}/>;
+                  onClick={this.onClick} readOnly subclass ft={<i className="m7-datetime__ft"/>} {...dataset}/>;
   }
 }
 

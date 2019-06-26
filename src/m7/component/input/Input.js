@@ -79,7 +79,7 @@ export default class Input extends React.Component {
   };
 
   render() {
-    const { className, title, placeholder, type, disabled, readOnly, onInput, ft } = this.props;
+    const { className, title, placeholder, type, disabled, readOnly, onInput, ft } = this.props, dataset = this.getDatasetProps();
     return <div className="m7-cell">
       {title ? <div className="m7-cell__hd">
         <label className="m7-label">{title}</label>
@@ -87,7 +87,7 @@ export default class Input extends React.Component {
       <div className="m7-cell__bd">
         <input ref={this.setRef("input")} className={`m7-input ${className}`} placeholder={placeholder} type={type}
                onClick={this.onClick} onFocus={this.onFocus} onInput={onInput} onBlur={this.onBlur}
-               disabled={disabled} readOnly={readOnly} defaultValue={this.state.data}/>
+               disabled={disabled} readOnly={readOnly} defaultValue={this.state.data} {...dataset}/>
       </div>
       <div className="m7-cell__ft">
         <i rel="icon"/>

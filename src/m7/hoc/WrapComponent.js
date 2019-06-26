@@ -138,6 +138,17 @@ export default function wrapper(opts = {}) {
 
       setTimeout = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+      /** 获取dataset */
+      getDatasetProps = (props = this.props) => {
+        const datasetProps = {};
+        Object.keys(props).forEach((k) => {
+          if (k.indexOf("data-") === 0) {
+            datasetProps[k] = props[k];
+          }
+        });
+        return datasetProps;
+      };
+
       render = () => {
         if (Type === "view") {
           const value = {

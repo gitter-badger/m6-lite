@@ -17,7 +17,7 @@ export default class Button extends React.PureComponent {
 
   render() {
     const { title, type, status, children, className = "", style, ...dataset } = this.props;
-    return <a href="javascript:" className={`m7-btn m7-btn_${status} m7-btn_${type} ${className}`} style={style} {...dataset} onClick={this.handleClick}>
+    return <a href="javascript:" {...dataset} className={`m7-btn m7-btn_${status} m7-btn_${type} ${className}`} style={style} onClick={this.handleClick}>
       {status === "loading" ? <i className="m7-icon-loading"/> : null}
       {title}
       {children}
