@@ -106,7 +106,7 @@ export default class MyList extends React.Component {
         </div>
         <div className="m7-cell__bd m7-pointer-events--none" style={{ textAlign: "right", paddingRight: "10px" }}>{info && info.wendu && `${info.wendu}℃`}</div>
         <div className="m7-cell__ft m7-pointer-events--none">{
-          currDate.type ? currDate.type : <i className="m7-loading-icon"/>
+          currDate.type ? currDate.type : <i className="m7-icon-loading"/>
         }</div>
       </div>
       <div className="m7-cell m7-pointer-events--none" style={{ fontSize: "small", backgroundImage: nextBackgroundImage }}>
@@ -127,7 +127,7 @@ export default class MyList extends React.Component {
     if (e.target.dataset.index) {
       let itemState = this.state.myList[~~e.target.dataset.index];
       if (itemState.info && itemState.info.wendu) {
-        this.props.history.push({ pathname: "/list-detail", state: itemState });
+        M7.navigate({ url: "/list-detail", state: itemState });
       }
     }
   };

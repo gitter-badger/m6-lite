@@ -36,6 +36,10 @@
       {
         "title": "Grid",
         "url": "/grid"
+      },
+      {
+        "title": "Icons",
+        "url": "/icons"
       }
     ]
   },
@@ -44,28 +48,24 @@
     "src": "./image/icon_nav_feedback.png",
     "sons": [
       {
-        "title": "Loading",
-        "url": "/loading"
+        "title": "Toast",
+        "url": "/process/toast"
       },
       {
         "title": "Modal",
-        "url": "/modal"
+        "url": "/process/modal"
       },
       {
         "title": "ActionSheet",
-        "url": "/actionsheet"
+        "url": "/process/actionsheet"
       },
       {
         "title": "Notification",
-        "url": "/notification"
+        "url": "/process/notification"
       },
       {
         "title": "Msg",
-        "url": "/msg"
-      },
-      {
-        "title": "Toast",
-        "url": "/toast"
+        "url": "/process/msg"
       }
     ]
   },
@@ -103,11 +103,7 @@
       },
       {
         "title": "全新微户政",
-        "url": "/bus-whz"
-      },
-      {
-        "title": "粤省事小程序 - 户政",
-        "url": "/miniprogram.html",
+        "url": "/bus-whz",
         "outer": true
       }
     ]

@@ -16,6 +16,7 @@ export default class IndexView extends React.Component {
   };
 
   async componentDidMount() {
+    this.props.history.frozen("demo-root"); // 路由冻结当前页面为根页面
     await this.setState({ lisContent: this.getCategory() });
   }
 
@@ -46,7 +47,7 @@ export default class IndexView extends React.Component {
             {
               c.sons.map((s, j) => {
                 let sOnClick = () => {
-                  this.props.history["push"]({ pathname: s.url });
+                  M7.navigate({ url: s.url, state: s });
                 };
                 return (<a key={`${i}-${j}`} className="demo-category-item__bd__i" onClick={sOnClick}>
                   <p>{s.title}</p>

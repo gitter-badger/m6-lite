@@ -1,12 +1,13 @@
 /**
  * Created by XLBerry on 2019/6/6
  */
+import M7 from "m7";
 import React from "react";
 import PropTypes from "prop-types";
 import "./header.less";
 
 export default function Header(props) {
-  const { title, desc, onBack = () => window.M7History.go(-1) } = props;
+  const { title, desc, onBack } = props;
   return (<div>
     <i className="weui-icon-back page-back" onClick={onBack}/>
     <div className="page-hd">
@@ -16,6 +17,12 @@ export default function Header(props) {
     </div>
   </div>);
 }
+
+Header.defaultProps = {
+  onBack: function () {
+    return M7.navigate({ delta: 1 });
+  }
+};
 
 Header.propTypes = {
   title: PropTypes.node,

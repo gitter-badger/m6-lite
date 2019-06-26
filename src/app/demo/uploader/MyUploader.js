@@ -109,7 +109,7 @@ export default class MyUploader extends React.Component {
         <M7.Uploader id="myUploader" title="图片上传" upload={this.handleUpload} download={this.handleDownload} autoOriginal/>
       </div>
       <div style={{ padding: "30px 15px 40px 15px" }}>
-        <M7.Button title="页面数据" type="primary" display="block" onClick={this.handleSubmit}/>
+        <M7.Button title="页面数据" type="default" onClick={this.handleSubmit}/>
       </div>
     </div>;
   }

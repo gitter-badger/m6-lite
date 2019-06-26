@@ -28,7 +28,7 @@ export default class MyInput extends React.Component {
 
   /** 获取验证码 */
   handleGetYZM = () => {
-    M7.showNotification({ type: "info", title: "验证码已发送", autoHidden: true });
+    M7.showNotification({ type: "info", title: "验证码已发送", duration: 2000 });
   };
 
   handleChange = ({ id, type, data }) => {
@@ -40,7 +40,7 @@ export default class MyInput extends React.Component {
     await this.setState({ checkStatus: "loading" });
     const result = await this.validate();
     if (result.length > 0) {
-      M7.showNotification({ type: "warn", title: result[0], autoHidden: true });
+      M7.showNotification({ type: "warn", title: result[0], duration: 2000 });
     }
     console.log("当前页面表单值", this.state);
     this.setState({ checkStatus: null });
@@ -74,9 +74,9 @@ export default class MyInput extends React.Component {
         <M7.Selector id="qzsj" title="签注时间" placeholder="请选择签注时间" type="datetime" onChange={this.handleChange}/>
       </div>
       <MySqry data={this.state.sqrys} />
-      <div style={{ padding: "30px 15px 40px 15px" }}>
-        <M7.Button title="提交" type="primary" display="block" status={this.state.checkStatus} onClick={this.handleSubmit}/>
-        <M7.Button title="初始化" type="default" display="block" status={this.state.checkStatus} onClick={this.handleInit}/>
+      <div className="m7-btns" style={{ padding: "30px 15px 40px 15px" }}>
+        <M7.Button title="初始化" type="default" status={this.state.checkStatus} onClick={this.handleInit}/>
+        <M7.Button title="提交" type="primary" status={this.state.checkStatus} onClick={this.handleSubmit}/>
       </div>
     </div>;
   }

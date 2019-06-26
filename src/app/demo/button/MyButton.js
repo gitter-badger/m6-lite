@@ -9,7 +9,7 @@ import Header from "../component/Header";
 export default class MyButton extends React.Component {
   render() {
     return <div>
-      <Header title="Button" desc="按钮" onBack={this.goBack}/>
+      <Header title="Button" desc="按钮"/>
       <div style={{padding: "15px"}}>
         <M7.Button title="页面主操作" type="primary"/>
         <div className="m7-btns">
