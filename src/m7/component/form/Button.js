@@ -4,7 +4,6 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { handleDataset } from "../../hoc/WrapComponent";
 
 export default class Button extends React.PureComponent {
 
@@ -12,14 +11,13 @@ export default class Button extends React.PureComponent {
     const { status, onClick } = this.props;
     if (status === "loading" || status === "disabled") return false;
     else {
-      handleDataset(this.props, e.target.dataset);
       return typeof onClick == "function" && onClick(e);
     }
   };
 
   render() {
-    const { title, type, status, children, className = "", style } = this.props;
-    return <a href="javascript:" className={`m7-btn m7-btn_${status} m7-btn_${type} ${className}`} style={style} onClick={this.handleClick}>
+    const { title, type, status, children, className = "", style, ...dataset } = this.props;
+    return <a href="javascript:" className={`m7-btn m7-btn_${status} m7-btn_${type} ${className}`} style={style} {...dataset} onClick={this.handleClick}>
       {status === "loading" ? <i className="m7-icon-loading"/> : null}
       {title}
       {children}

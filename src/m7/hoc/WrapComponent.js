@@ -180,28 +180,3 @@ export default function wrapper(opts = {}) {
     return hocForwardRef;
   };
 }
-
-/** 获取定义在Component组件上的data集 */
-export function handleDataset(props = {}, DOMStringMap) {
-  const dataset = {}, toSetMap = !!DOMStringMap;
-  let key, iKeys, iKey;
-  Object.keys(props).forEach((k) => {
-    if (k.indexOf("data-") === 0) {
-      key = k.replace("data-", "");
-      iKeys = key.split("-");
-      if (iKeys.length === 1) {
-        iKey = key.toLowerCase();
-      } else {
-        iKey = iKeys[0].toLowerCase();
-        for (let i = 1, len = iKeys.length; i < len; i++) {
-          iKey += iKeys[i].substr(0, 1).toUpperCase() + iKeys[i].substr(1).toLowerCase();
-        }
-      }
-      dataset[iKey] = props[k];
-      if (toSetMap) {
-        DOMStringMap[iKey] = props[k];
-      }
-    }
-  });
-  return dataset;
-}
