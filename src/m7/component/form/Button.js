@@ -4,19 +4,23 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { handleDataset } from "../../hoc/WrapComponent";
 
 export default class Button extends React.PureComponent {
 
   handleClick = (e) => {
     const { status, onClick } = this.props;
     if (status === "loading" || status === "disabled") return false;
-    else return typeof onClick == "function" && onClick(e);
+    else {
+      handleDataset(this.props, e.target.dataset);
+      return typeof onClick == "function" && onClick(e);
+    }
   };
 
   render() {
     const { title, type, status, children, className = "", style } = this.props;
     return <a href="javascript:" className={`m7-btn m7-btn_${status} m7-btn_${type} ${className}`} style={style} onClick={this.handleClick}>
-      {status === "loading" ? <i className="m7-loading-icon"/> : null}
+      {status === "loading" ? <i className="m7-icon-loading"/> : null}
       {title}
       {children}
     </a>;
