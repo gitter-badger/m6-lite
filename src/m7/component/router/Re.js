@@ -8,8 +8,9 @@ import { Router as BasalRouter, Route, Switch } from "react-router-dom";
 // import { Transition, TransitionGroup, CSSTransition } from "react-transition-group";
 import Notice from "../process/Notice";
 import Picker from "../process/Picker";
+import Modal from "../process/Modal";
 import Loading from "../process/Loading";
-import { history } from "./History";
+import history from "./History";
 
 export default class Re extends React.PureComponent {
 
@@ -39,6 +40,7 @@ export default class Re extends React.PureComponent {
         <div>
           <Notice/>
           <Picker/>
+          <Modal/>
           <Loading/>
         </div>
       </div>
