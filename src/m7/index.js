@@ -6,6 +6,7 @@ require("./utils/Prototype");
 import "./index.less";
 
 import Re from "./component/router/Re";
+import history from "./component/router/History";
 import create from "./hoc/WrapComponent";
 import * as boost from "./hoc/Boost";
 import request, { requestAsync } from "./utils/Fetch";
@@ -19,7 +20,7 @@ import Uploader from "./component/uploader/Uploader";
 import Gallery from "./component/uploader/Gallery";
 
 export default {
-  Re,
+  Re, navigate: history.navigate,
   create, boost, request, requestAsync,
   Button, Input, Selector,
   List, Uploader, Gallery,
