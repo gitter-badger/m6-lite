@@ -15,15 +15,23 @@
   word-break: break-all;
 }
 
-.m7-toptips_warn {
-  display: block;
-  color: #FFF;
+.m7-toptips__title {
+  flex: 1;
+  color: #ffffff;
+}
+
+.m7-toptips__ft {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.m7-toptips--warn {
+  display: flex;
   background-color: @colorWarn;
 }
 
-.m7-toptips_info {
-  display: block;
-  color: #FFF;
+.m7-toptips--info {
+  display: flex;
   background-color: #10AEFF;
 }
 
@@ -34,7 +42,7 @@
   width: 100%;
   left: 0;
   bottom: 0;
-  z-index: 5000;
+  z-index: 1001;
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
   -webkit-backface-visibility: hidden;
@@ -78,9 +86,80 @@
   overflow: hidden;
 }
 
+// 对话框dialog
+
+.m7-modal {
+  position: fixed;
+  z-index: 1002;
+  top: 45%;
+  left: @cellGapV;
+  right: @cellGapV;
+  background: @bgColorContent;
+  text-align: center;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 17px;
+  .prefix(transform, translate(0, -50%));
+}
+
+.m7-modal__hd {
+  padding: 32px 24px 16px;
+}
+
+.m7-modal__title {
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.m7-modal__bd {
+  padding: 0 24px 32px;
+  min-height: 40px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: @textColorDesc;
+}
+
+.m7-modal__ft {
+  position: relative;
+  line-height: 64px;
+  display: flex;
+
+  &:before {
+    .setTopLine();
+  }
+}
+
+.m7-modal__btn {
+  position: relative;
+  display: block;
+  flex: 1;
+  font-weight: 700;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  &:active {
+    background-color: @bgColorDefault;
+  }
+}
+
+.m7-modal__btn--default {
+  color: @textColorTitle;
+}
+
+.m7-modal__btn--primary {
+  color: @linkColorDefault;
+}
+
+.m7-modal__btn--default + .m7-modal__btn--primary {
+  &:before {
+    .setLeftLine();
+  }
+}
+
 // 加载层
 
-.m7-loading-icon {
+.m7-icon-loading {
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -102,26 +181,33 @@
 
 .m7-loading-toast {
   position: fixed;
-  z-index: 1001;
-  width: 7.6em;
+  z-index: 1003;
+  min-width: 7.6em;
   min-height: 7.6em;
-  top: 180px;
+  top: 45%;
   left: 50%;
-  margin-left: -3.8em;
   background: rgba(17, 17, 17, 0.7);
   text-align: center;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
+  overflow: hidden;
+  .prefix(transform, translate(-50%, -50%));
+}
 
-  .m7-loading-icon {
-    margin: 32px 0 0;
-    width: 38px;
-    height: 38px;
-    vertical-align: baseline;
-  }
+.m7-loading__icon {
+  font-size: 30px;
+  color: #ffffff;
+  margin: 32px 0 0;
+  width: 38px;
+  height: 38px;
+  vertical-align: baseline;
+}
+.m7-loading-toast--noicon {
+  min-height: auto;
+  padding-top: 16px;
 }
 
 .m7-loading-toast__content {
-  margin: 0 0 16px;
+  margin: 0 16px 16px;
   font-size: 14px;
 }

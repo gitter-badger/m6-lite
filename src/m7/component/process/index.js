@@ -24,6 +24,16 @@ export default {
     args: { show: false },
     range: ["picker"]
   }),
+  showToast: (args) => Broadcast.publish({
+    channel: "M7_PROCESS",
+    args: { ...args, show: true },
+    range: ["loading"]
+  }),
+  hideToast: () => Broadcast.publish({
+    channel: "M7_PROCESS",
+    args: { show: false },
+    range: ["loading"]
+  }),
   showLoading: (args) => Broadcast.publish({
     channel: "M7_PROCESS",
     args: { ...args, show: true },
@@ -33,5 +43,10 @@ export default {
     channel: "M7_PROCESS",
     args: { show: false },
     range: ["loading"]
+  }),
+  showModal: (args) => Broadcast.publish({
+    channel: "M7_PROCESS",
+    args: { ...args, show: true },
+    range: ["modal"]
   }),
 };

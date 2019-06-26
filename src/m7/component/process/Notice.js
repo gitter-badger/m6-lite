@@ -7,21 +7,30 @@ import ProcessComponent from "./ProcessComponent";
 export default class Notice extends ProcessComponent {
   state = {};
 
-  onReceive = ({ title, className, type, autoHidden = true, delay = 2000 }) => {
-    this.setState({ title, className, type }, () => {
-      autoHidden && setTimeout(() => {
-        this.setState({ type: null, title: null, className: null });
-      }, delay);
+  onReceive = ({ title, className, type, duration }) => {
+    this.setState({ title, className, type, duration }, () => {
+      duration && setTimeout(() => {
+        this.setState({ type: null, title: null, className: null, duration: null });
+      }, duration);
     });
   };
 
+  handleClick = (e) => {
+    e.preventDefault();
+    this.setState({ type: null, title: null, className: null, duration: null });
+  };
+
   render() {
-    const { title, className, type } = this.state;
-    return <div className={`m7-toptips m7-toptips_${type} ${className}`}>{title}</div>;
+    const { title, className, type, duration } = this.state;
+    return <div className={`m7-toptips m7-toptips--${type} ${className}`}>
+      <p className="m7-toptips__title">{title}</p>
+      {
+        duration ? null : <div><i className="m7-toptips__ft weui-icon-clear" onClick={this.handleClick}/></div>
+      }
+    </div>;
   }
 }
 
 Notice.defaultProps = {
-  className: "",
   type: "notice"
 };
