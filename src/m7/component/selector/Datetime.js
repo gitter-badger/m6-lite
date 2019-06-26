@@ -63,9 +63,9 @@ export default class Datetime extends React.PureComponent {
       content: <DatetimeView format={this.props.format} onChange={this.handleOnChange} data={data}/>,
       contentCls: "m7-datetime__bd",
       cancelText: "清空",
-      cancel: () => setStateData(null, true),
+      fail: () => setStateData(null, true),
       confirmText: "确定",
-      confirm: () => setStateData(this.tmpData, false),
+      success: () => setStateData(this.tmpData, false),
     });
   };
 

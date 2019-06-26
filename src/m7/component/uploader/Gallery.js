@@ -3,6 +3,7 @@
  */
 import React from "react";
 import PropTypes from "prop-types";
+import history from "../router/History";
 import ScaleElement from "./ScaleElement";
 
 export default class Gallery extends React.PureComponent {
@@ -31,7 +32,7 @@ export default class Gallery extends React.PureComponent {
   handleDisplay = (hidden) => {
     this.scaleElement.initVariable();
     this.scaleElement.toAnimation();
-    window.M7History.interveneState(hidden ? "" : "gallery");
+    history.frozen(hidden ? "" : "gallery");
     if (!hidden) {
       this.scaleElement.setImageElementSize(this.props.src);
     }

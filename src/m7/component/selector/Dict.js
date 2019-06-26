@@ -66,8 +66,8 @@ export default class Dict extends React.PureComponent {
                          onChange={this.handleOnChange} dataFor={dataFor}/>,
       contentCls: "m7-dict__bd",
       cancelText: "清空",
-      cancel: () => setStateData({ checked: [], checkedLabel: [] }, true),
-      confirm: () => setStateData({ checked: this.tmpData, checkedLabel: this.tmpDataLabel }, false),
+      fail: () => setStateData({ checked: [], checkedLabel: [] }, true),
+      success: () => setStateData({ checked: this.tmpData, checkedLabel: this.tmpDataLabel }, false),
     });
   };
 
