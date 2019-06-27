@@ -71,10 +71,10 @@ function fetchExec(obj) {
     credentials: "include", // 携带cookie，其他配置 include omit same-origin
     body: requestBody
   }), { timeout, url }).then(res => {
-    if (responseType === "json") {
+    if (["text", "json"].includes(responseType)) {
       const { status, statusText } = res;
       if ((status >= 200 && status < 300) || status === 304) {
-        res.json().then(resultData => {
+        res[responseType]().then(resultData => {
           !execHandle.abort && typeof success == "function" && success({
             data: resultData,
             headers: res.headers,
