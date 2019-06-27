@@ -44,7 +44,7 @@ export default class MySqry extends React.Component {
                             rules={[{ type: "required", message: "请输入姓名" }, { type: "cnName", message: "请输入正确姓名" }]}/>
                   <M7.Input id={`${i}-gmsfhm`} title="公民身份号码" placeholder="请输入公民身份号码" onChange={this.handleChange} value={sqry.gmsfhm}
                             rules={[{ type: "required", message: "请输入公民身份号码" }]}/>
-                  <M7.Selector id={`${i}-yzqrgx`} type="dict" title="与主迁入关系" placeholder="请选择与主迁入关系" onChange={this.handleChange}/>
+                  <M7.Dict id={`${i}-yzqrgx`} title="与主迁入关系" placeholder="请选择与主迁入关系" onChange={this.handleChange}/>
                 </div>
               </div>;
             } else {

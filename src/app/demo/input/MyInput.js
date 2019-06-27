@@ -69,9 +69,9 @@ export default class MyInput extends React.Component {
       </div>
       <div className="m7-cells__title">个人信息</div>
       <div className="m7-cells">
-        <M7.Selector id="csrq" title="出生日期" placeholder="请选择出生日期" type="datetime" format="yyyy/MM/dd"
+        <M7.Datetime id="csrq" title="出生日期" placeholder="请选择出生日期" format="yyyy/MM/dd"
                      rules={[{ type: "required", message: "请选择出生日期" }]} onChange={this.handleChange}/>
-        <M7.Selector id="qzsj" title="签注时间" placeholder="请选择签注时间" type="datetime" onChange={this.handleChange}/>
+        <M7.Datetime id="qzsj" title="签注时间" placeholder="请选择签注时间" onChange={this.handleChange}/>
       </div>
       <MySqry data={this.state.sqrys} />
       <div className="m7-btns" style={{ padding: "30px 15px 40px 15px" }}>

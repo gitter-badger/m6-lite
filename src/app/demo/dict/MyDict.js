@@ -20,10 +20,10 @@ export default class MyDict extends React.Component {
       <Header title="Dict" desc="表单字典，提供字典容器对象，支持标准格式数据载入"/>
       <div className="m7-cells__title">字典</div>
       <div className="m7-cells">
-        <M7.Selector id="dict1" type="dict" title="单选" placeholder="请选择字典1" dataFor={DataFor} onChange={this.handleChange}/>
-        <M7.Selector id="dict2" type="dict" title="多选" placeholder="请选择字典2" searchable multiple dataFor={DataFor} onChange={this.handleChange}/>
-        <M7.Selector id="dict3" type="dict" title="多标签单选" placeholder="请选择字典3" cascade dataFor={DataForCascade} onChange={this.handleChange}/>
-        <M7.Selector id="dict4" type="dict" title="多标签多选" placeholder="请选择字典4" cascade multiple dataFor={DataForCascade} onChange={this.handleChange}
+        <M7.Dict id="dict1" title="单选" placeholder="请选择字典1" dataFor={DataFor} onChange={this.handleChange}/>
+        <M7.Dict id="dict2" title="多选" placeholder="请选择字典2" searchable multiple dataFor={DataFor} onChange={this.handleChange}/>
+        <M7.Dict id="dict3" title="多标签单选" placeholder="请选择字典3" cascade dataFor={DataForCascade} onChange={this.handleChange}/>
+        <M7.Dict id="dict4" title="多标签多选" placeholder="请选择字典4" cascade multiple dataFor={DataForCascade} onChange={this.handleChange}
                      valueRender={({ value, label }) => label.map((d) => d.detail).join("") + value.detail}/>
       </div>
       <div className="m7-cells__title">页面数据</div>
