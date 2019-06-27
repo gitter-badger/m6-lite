@@ -45,8 +45,8 @@ export default class List extends React.PureComponent {
   }
 
   onClick = (e) => {
-    const { onClick } = this.props, target = e.target, dataset = target.dataset, data = this.state.data[dataset.index];
-    typeof onClick == "function" && onClick({ target, dataset, data });
+    const { onClick } = this.props;
+    typeof onClick == "function" && onClick({ ...e, data: this.state.data[e.target.dataset.index] });
   };
 
   render() {

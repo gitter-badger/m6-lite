@@ -13,7 +13,8 @@ import request, { requestAsync } from "./utils/Fetch";
 
 import Button from "./component/form/Button";
 import Input from "./component/input/Input";
-import Selector from "./component/selector/Selector";
+import Datetime from "./component/selector/Datetime";
+import Dict from "./component/selector/Dict";
 import List from "./component/list/List";
 import Uploader from "./component/uploader/Uploader";
 import Gallery from "./component/uploader/Gallery";
@@ -22,7 +23,7 @@ import Popups from "./component/process/index"; // 弹窗通知组事件
 export default {
   Re, navigate: history.navigate,
   create, boost, request, requestAsync,
-  Button, Input, Selector,
+  Button, Input, Datetime, Dict,
   List, Uploader, Gallery,
   ...Popups,
 };
