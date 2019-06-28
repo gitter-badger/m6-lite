@@ -26,7 +26,9 @@ English | 简体中文
 
 ### 下一步
 
-如果你想基于 m6-cli 创建项目，可安装 [m6-cli](https://www.npmjs.com/package/m6-cli) 构建工具
+#### 安装
+
+如果你想基于 m6-cli 创建项目，可安装 m6-cli [![npm version](https://img.shields.io/npm/v/m6-cli.svg)](https://www.npmjs.com/package/m6-cli) 构建工具
 
 ```cmd
 npm install -g m6-cli
@@ -40,6 +42,45 @@ m6 init -f m6-cli
 
 更多关于 m6-cli 请查阅 [m6-cli](https://github.com/xlberry/m6-cli)
 
+#### 编译
+
+```cmd
+npm run dev
+```
+
+### 使用
+
+#### global
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xlberry/m6-lite@v1.0.0/output/compile/css/m7.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xlberry/m6-lite@v1.0.0/output/compile/m7.min.js"></script>
+<script type="text/javascript">
+  var Page1 = React.createElement(m7.create()(React.createElement("div")));
+  var Page2 = React.createElement(m7.create()(React.createElement("div")));
+  var useRe1 = React.createElement(m7.Re, { path: "/page1", component: Page1 });
+  var useRe2 = React.createElement(m7.Re, { path: "/page2", component: Page2 });
+  React.createElement(m7.Re, null, useRe1, useRe2);
+</script>
+```
+
+#### import as module
+
+```jsx harmony
+import React from "react";
+import M7 from "m7";
+import Page1 from "./Page1.js";
+import Page2 from "./Page2.js";
+
+<M7.Re>
+  <M7.Re path="/page1" component={Page1}/>
+  <M7.Re path="/page2" component={Page2}/>
+</M7.Re>
+```
+
+### 贡献
+
+如果你有好的意见或建议，欢迎给我们提 issue 或 pull request
 
 ### License
 
