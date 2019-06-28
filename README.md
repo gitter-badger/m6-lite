@@ -1,37 +1,46 @@
-## Welcome to GitHub Pages
+English | 简体中文
 
-You can use the [editor on GitHub](https://github.com/xlberry/m6-lite/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## M6-Lite
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+基于 React 库和 WEUI 交互设计的轻量级表单类组件库。
 
-### Markdown
+### 特性
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- **简化** Component State Flux 数据流*
+- **优化细节**，如请求列队，事件优化，函数防抖等
+- **异步编码**，推荐 ES2015+ Async Functions 编码模式，借鉴 elm 概念 (Inspired by dva-model) 
 
-```markdown
-Syntax highlighted code block
+### 例子预览
 
-# Header 1
-## Header 2
-### Header 3
+手机扫描
 
-- Bulleted
-- List
+![Image](https://github.com/xlberry/m6-cli/blob/master/help/image/demo-qr-code.png)
 
-1. Numbered
-2. List
+[https://xlberry.github.io/m6-lite](https://xlberry.github.io/m6-lite/#/)
 
-**Bold** and _Italic_ and `Code` text
+### 文档
 
-[Link](url) and ![Image](src)
+- WeUI 视觉标准参考 [weui-design](https://github.com/weui/weui-design)
+- 掌握 m6-lite 的所有 [API](https://github.com/xlberry/m6-cli/blob/master/help/m6-lite-api.md)
+- 查看 m6-lite 配置方式 [API](https://github.com/xlberry/m6-cli/blob/master/help/m6-lite-config.md)
+
+### 下一步
+
+如果你想基于 m6-cli 创建项目，可安装 [m6-cli](https://www.npmjs.com/package/m6-cli) 构建工具
+
+```cmd
+npm install -g m6-cli
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+快速构建和迭代升级
 
-### Jekyll Themes
+```cmd
+m6 init -f m6-cli
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xlberry/m6-lite/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+更多关于 m6-cli 请查阅 [m6-cli](https://github.com/xlberry/m6-cli)
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### License
+
+[The MIT License](http://opensource.org/licenses/MIT)
