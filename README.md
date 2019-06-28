@@ -14,15 +14,15 @@ English | 简体中文
 
 手机扫描
 
-![Image](https://github.com/xlberry/m6-cli/blob/master/help/image/demo-qr-code.png)
+![Image](https://github.com/xlberry/m6-lite/blob/master/help/image/demo-qr-code.png)
 
 [https://xlberry.github.io/m6-lite](https://xlberry.github.io/m6-lite/#/)
 
 ### 文档
 
 - WeUI 视觉标准参考 [weui-design](https://github.com/weui/weui-design)
-- 掌握 m6-lite 的所有 [API](https://github.com/xlberry/m6-cli/blob/master/help/m6-lite-api.md)
-- 查看 m6-lite 配置方式 [API](https://github.com/xlberry/m6-cli/blob/master/help/m6-lite-config.md)
+- 掌握 m6-lite 的所有 [API](https://github.com/xlberry/m6-lite/blob/master/help/m6-lite-api.md)
+- 查看 m6-lite 配置方式 [API](https://github.com/xlberry/m6-lite/blob/master/help/m6-lite-config.md)
 
 ### 下一步
 
