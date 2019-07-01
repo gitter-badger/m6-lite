@@ -1,8 +1,20 @@
 English | 简体中文
 
-## M6-Lite
+<p align="center">
+  <a href="javascript:" rel="noopener noreferrer">
+    <img width="100" src="https://github.com/xlberry/m6-lite/blob/master/help/image/bee.png" alt="M6 Lite logo">
+  </a>
+</p>
 
-基于 React 库和 WEUI 交互设计的轻量级表单类组件库。
+<p align="center">
+![node](https://img.shields.io/badge/node-%3E%3D8.0.0-green.svg)
+[![Build Status](https://img.shields.io/travis/xlberry/m6-lite.svg?style=flat-square)](https://travis-ci.org/xlberry/m6-lite)
+</p>
+
+<h2 align="center">M6 Lite</h2>
+
+基于 React 库和 WEUI 交互设计的轻量级表单类组件库
+
 
 ### 特性
 
