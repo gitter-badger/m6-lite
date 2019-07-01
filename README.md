@@ -14,7 +14,7 @@ English | 简体中文
 
 手机扫描
 
-![Image](https://github.com/xlberry/m6-lite/blob/master/help/image/demo-qr-code.png)
+![Image](https://github.com/xlberry/m6-lite/blob/master/help/image/demo-qrcode.png)
 
 [https://xlberry.github.io/m6-lite](https://xlberry.github.io/m6-lite/#/)
 
@@ -28,7 +28,9 @@ English | 简体中文
 
 #### 安装
 
-如果你想基于 m6-cli 创建项目，可安装 m6-cli [![npm version](https://img.shields.io/npm/v/m6-cli.svg)](https://www.npmjs.com/package/m6-cli) 构建工具
+如果你想基于 m6-cli 创建项目，可安装构建工具 
+
+[![npm version](https://img.shields.io/npm/v/m6-cli.svg?label=m6-cli&style=flat-square)](https://www.npmjs.com/package/m6-cli)
 
 ```cmd
 npm install -g m6-cli
