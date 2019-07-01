@@ -7,14 +7,13 @@ English | 简体中文
 </p>
 
 <p align="center">
-  <a href="javascript:"><img src="https://img.shields.io/badge/node-%3E%3D8.0.0-green.svg" alt="Node Version"></a>
+  <a href="javascript:"><img src="https://img.shields.io/badge/node-%3E%3D8-green.svg?style=flat-square" alt="Node Version"></a>
   <a href="https://travis-ci.org/xlberry/m6-lite"><img src="https://img.shields.io/travis/xlberry/m6-lite.svg?style=flat-square" alt="Build Status"></a>
 </p>
 
-<h2 align="center">M6 Lite</h2>
-
-基于 React 库和 WEUI 交互设计的轻量级表单类组件库
-
+<h2 align="center">
+  <p style="font-size: initial; font-weight: normal; margin-top: 10px; color: gray;">基于 React 库和 WEUI 交互设计的轻量级表单类组件库</p>
+</h2>
 
 ### 特性
 
