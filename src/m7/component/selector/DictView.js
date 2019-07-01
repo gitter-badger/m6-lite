@@ -34,7 +34,7 @@ export default class DictView extends React.Component {
   };
 
   /** 列表点击 */
-  handleItemClick = async ({ /*target,*/ dataset, data }) => {
+  handleItemClick = async ({ target: { dataset }, data }) => {
     if (this.itemClickLock) return;
     this.itemClickLock = true;
     if (this.props.cascade) {
