@@ -11,9 +11,7 @@ English | 简体中文
   <a href="https://travis-ci.org/xlberry/m6-lite"><img src="https://img.shields.io/travis/xlberry/m6-lite.svg?style=flat-square" alt="Build Status"></a>
 </p>
 
-<h2 align="center">
-  <p style="font-size: initial; font-weight: normal; margin-top: 10px; color: gray;">基于 React 库和 WEUI 交互设计的轻量级表单类组件库</p>
-</h2>
+<p align="center">基于 React 库和 WEUI 交互设计的轻量级表单类组件库</p>
 
 ### 特性
 
