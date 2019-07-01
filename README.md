@@ -7,8 +7,8 @@ English | 简体中文
 </p>
 
 <p align="center">
-![node](https://img.shields.io/badge/node-%3E%3D8.0.0-green.svg)
-[![Build Status](https://img.shields.io/travis/xlberry/m6-lite.svg?style=flat-square)](https://travis-ci.org/xlberry/m6-lite)
+  <a href="javascript:"><img src="https://img.shields.io/badge/node-%3E%3D8.0.0-green.svg" alt="Node Version"></a>
+  <a href="https://travis-ci.org/xlberry/m6-lite"><img src="https://img.shields.io/travis/xlberry/m6-lite.svg?style=flat-square" alt="Build Status"></a>
 </p>
 
 <h2 align="center">M6 Lite</h2>
