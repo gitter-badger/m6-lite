@@ -39,7 +39,7 @@ English | 简体中文
 
 如果你想基于 m6-cli 创建项目，可安装构建工具 
 
-[![npm version](https://img.shields.io/npm/v/m6-cli.svg?label=m6-cli&style=flat-square)](https://www.npmjs.com/package/m6-cli)
+[![npm version](https://img.shields.io/npm/v/m6-cli.svg?label=m6-cli&style=flat-square)](https://www.npmjs.com/package/m6-cli) [![Join the chat at https://gitter.im/xlberry/m6-lite](https://badges.gitter.im/xlberry/m6-lite.svg)](https://gitter.im/xlberry/m6-lite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ```cmd
 npm install -g m6-cli
